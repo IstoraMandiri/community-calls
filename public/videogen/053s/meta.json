@@ -1,0 +1,26 @@
+{
+  "summary": "A 90-second slice of Call 53 for testing the videogen timeline: intro slides, a few minutes of live stage, then the stats / thanks / logo outro.",
+  "hosts": [
+    "Istora Mandiri"
+  ],
+  "episodeUrl": "cc.ethereumclassic.org/calls/53",
+  "intro": "/videogen/_shared/jingle.m4a",
+  "outro": "/videogen/_shared/jingle.m4a",
+  "chapters": [
+    {
+      "title": "Welcome",
+      "start": 0,
+      "end": 30
+    },
+    {
+      "title": "Housekeeping",
+      "start": 30,
+      "end": 60
+    },
+    {
+      "title": "Getting Started",
+      "start": 60,
+      "end": 90
+    }
+  ]
+}

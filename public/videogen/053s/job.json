@@ -1,0 +1,28 @@
+{
+  "call": {
+    "number": 53,
+    "title": "Neo Classic (90s sample)",
+    "date": "2026-05-29"
+  },
+  "audio": "/videogen/053s/audio.m4a",
+  "vtt": "/videogen/053s/transcript.vtt",
+  "meta": "/videogen/053s/meta.json",
+  "participants": [
+    {
+      "name": "Istora Mandiri",
+      "avatar": "/videogen/_shared/avatars/istora.png"
+    },
+    {
+      "name": "Diego L.L.",
+      "avatar": "/videogen/_shared/avatars/diego.png"
+    },
+    {
+      "name": "Lunar",
+      "avatar": "/videogen/_shared/avatars/lunarwarden.webp"
+    },
+    {
+      "name": "IAV",
+      "avatar": "/videogen/_shared/avatars/inargentumveritas.png"
+    }
+  ]
+}

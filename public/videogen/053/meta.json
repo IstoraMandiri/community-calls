@@ -1,0 +1,18 @@
+{
+  "summary": "Diego walks through the case for stateless Ethereum Classic — shrinking archive node growth, letting thin clients validate, and the long-term security story. Lunar pushes back on whether 'free' validation undermines the proof-of-work cost model. Istora keeps reframing for non-technical viewers.",
+  "hosts": ["Istora Mandiri"],
+  "episodeUrl": "cc.ethereumclassic.org/calls/53",
+  "intro": "/videogen/_shared/jingle.m4a",
+  "outro": "/videogen/_shared/jingle.m4a",
+  "chapters": [
+    { "title": "Welcome + Green Room Recap", "start": 0, "end": 480 },
+    { "title": "Website Rebrand to Astro", "start": 480, "end": 900 },
+    { "title": "Enter the Matrix?", "start": 900, "end": 1230 },
+    { "title": "Hard Fork: EIPs Shortlist", "start": 1230, "end": 1830 },
+    { "title": "ECIP-6780 + Stateless Path", "start": 1830, "end": 2280 },
+    { "title": "Lunar's Ossification Argument", "start": 2280, "end": 3000 },
+    { "title": "EIP-1559 / 7702 Deferred", "start": 3000, "end": 3600 },
+    { "title": "Quantum Threat Debate", "start": 3600, "end": 4500 },
+    { "title": "Close + Next Call", "start": 4500, "end": 5169 }
+  ]
+}

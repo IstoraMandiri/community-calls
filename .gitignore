@@ -25,3 +25,13 @@ pnpm-debug.log*
 
 # VTT download cache
 scripts/.vtt-cache/
+
+# Videogen pipeline cache + outputs
+.cache/
+test-results/
+playwright-report/
+tests/videogen/fixtures/*.m4a
+# Rendered MP4s — never commit. Audio is also excluded for now (TBD where
+# video/audio data lives); vtt/meta/avatars under public/videogen/<NN>/ are fine.
+public/videogen/**/*.mp4
+public/videogen/**/*.m4a
