@@ -20,6 +20,21 @@ export function normalize(buffer: AudioBuffer, targetPeak = 0.95): AudioBuffer {
   return buffer;
 }
 
+// Fade the last `fadeSamples` of a buffer down to silence with an equal-power
+// (cosine) curve, so a recording ends gracefully instead of cutting off.
+export function fadeOut(buffer: AudioBuffer, fadeSamples: number): AudioBuffer {
+  const n = Math.min(fadeSamples, buffer.length);
+  if (n <= 0) return buffer;
+  const start = buffer.length - n;
+  for (let c = 0; c < buffer.numberOfChannels; c++) {
+    const d = buffer.getChannelData(c);
+    for (let i = 0; i < n; i++) {
+      d[start + i] *= Math.cos((i / n) * (Math.PI / 2)); // 1 -> 0
+    }
+  }
+  return buffer;
+}
+
 // Minimal 16-bit PCM WAV encoder for an AudioBuffer (offline render -> download).
 export function audioBufferToWav(buffer: AudioBuffer): Blob {
   const numCh = buffer.numberOfChannels;

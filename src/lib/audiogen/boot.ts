@@ -8,7 +8,7 @@
 // output instantly; Record taps the master into a WAV.
 
 import { LAYERS, compose, DEFAULT_SELECTION, type Selection } from "./layers";
-import { audioBufferToWav, normalize } from "./wav";
+import { audioBufferToWav, fadeOut, normalize } from "./wav";
 
 // @strudel/web exposes initStrudel on window immediately; the rest (evaluate,
 // hush, samples, setcps, note, s, stack, ...) are injected as globals only
@@ -206,6 +206,7 @@ export function boot() {
   const RECORD_SECONDS =
     Number(new URLSearchParams(location.search).get("rec")) || 60;
   const PHRASE_CYCLES = 4; // 4 cycles = 16 beats (our cps puts 4 beats/cycle)
+  const TAIL_SECONDS = 4; // extra audio after the last phrase, faded to silence
 
   let tap: Tap | null = null;
   let lastUrl: string | null = null;
@@ -386,9 +387,9 @@ export function boot() {
         baseCycle = cycleNow - (bufferSize / sr) * cps;
       });
 
-      // Record the target plus one phrase of head/tail room so trimming to a
-      // whole number of phrases always has enough material.
-      const captureSec = RECORD_SECONDS + phraseSec + 2;
+      // Record the target plus one phrase of alignment room and the fade tail,
+      // so there's always enough material to trim + fade out.
+      const captureSec = RECORD_SECONDS + phraseSec + TAIL_SECONDS + 2;
       const mins = Math.round((RECORD_SECONDS / 60) * 10) / 10;
       setStatus(`recording ~${mins} min (bar-aligned)...`);
       await new Promise((r) => setTimeout(r, captureSec * 1000));
@@ -409,10 +410,18 @@ export function boot() {
         Math.floor((raw.length - offset) / samplesPerCycle / PHRASE_CYCLES) *
         PHRASE_CYCLES;
       const nCycles = Math.max(PHRASE_CYCLES, Math.min(wantCycles, haveCycles));
-      const length = Math.min(
+      // Whole-phrase content (bar-aligned start + end), then up to TAIL_SECONDS
+      // of extra audio that we fade out, so the clip ends gracefully instead of
+      // cutting off mid-sound.
+      const contentLen = Math.min(
         raw.length - offset,
         Math.round(nCycles * samplesPerCycle),
       );
+      const tailLen = Math.min(
+        raw.length - offset - contentLen,
+        Math.round(TAIL_SECONDS * sr),
+      );
+      const length = contentLen + tailLen;
       if (length <= 0)
         throw new Error("no audio captured - press Play, then Record");
 
@@ -423,7 +432,7 @@ export function boot() {
           .set(raw.getChannelData(c).subarray(offset, offset + length));
       }
 
-      const wav = audioBufferToWav(normalize(clip));
+      const wav = audioBufferToWav(fadeOut(normalize(clip), tailLen));
       if (lastUrl) URL.revokeObjectURL(lastUrl);
       lastUrl = URL.createObjectURL(wav);
       audio.src = lastUrl;
@@ -433,7 +442,7 @@ export function boot() {
       dl.classList.remove("hidden");
       setStatus(
         `recorded ${(length / sr).toFixed(1)}s ` +
-          `(${nCycles / PHRASE_CYCLES} x 16-beat phrases) -> WAV ready`,
+          `(${nCycles / PHRASE_CYCLES} phrases + ${(tailLen / sr).toFixed(1)}s fade) -> WAV ready`,
       );
     } catch (err) {
       console.error(err);
