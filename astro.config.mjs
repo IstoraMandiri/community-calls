@@ -33,13 +33,19 @@ const stripDevRoutes = {
   hooks: {
     "astro:build:done": async ({ dir }) => {
       const { readdir } = await import("node:fs/promises");
-      // Top-level outputs: the route dir (directory build format), its .html
-      // (file build format), and any extra dirs the route owns.
-      const topLevel = DEV_ROUTES.flatMap((r) => [
-        r.name,
-        `${r.name}.html`,
-        ...(r.extraDirs ?? []),
-      ]);
+      // Derive everything a route owns from the single DEV_ROUTES table in one
+      // pass, so the route name isn't iterated/re-listed twice:
+      //   - topLevel: outputs at the build root — the route dir (directory
+      //     build format), its .html (file build format), and any extra dirs.
+      //   - chunkTokens: _astro chunk name-tokens — the route's own page chunk
+      //     plus the vendor chunks it alone pulls in (vendor chunks are named
+      //     after the package, not the route, so they're listed per route).
+      const topLevel = [];
+      const chunkTokens = [];
+      for (const r of DEV_ROUTES) {
+        topLevel.push(r.name, `${r.name}.html`, ...(r.extraDirs ?? []));
+        chunkTokens.push(r.name, ...(r.vendors ?? []));
+      }
       await Promise.all(
         topLevel.map((t) =>
           rm(new URL(`./${t}`, dir), { recursive: true, force: true }),
@@ -48,13 +54,6 @@ const stripDevRoutes = {
       const astroDir = new URL("./_astro/", dir);
       try {
         const entries = await readdir(astroDir);
-        // Strip each route's own page chunk plus the vendor chunks it alone
-        // pulls in. Vendor chunks are named after the package (not the route),
-        // so they must be listed explicitly per route.
-        const patterns = DEV_ROUTES.flatMap((r) => [
-          r.name,
-          ...(r.vendors ?? []),
-        ]);
         // Escape regex metacharacters and require word boundaries so a token
         // like "audiogen" matches the dev chunk "audiogen.<hash>.js" but NOT an
         // unrelated prod chunk that merely contains the substring (e.g.
@@ -62,7 +61,7 @@ const stripDevRoutes = {
         const escapeRe = (/** @type {string} */ s) =>
           s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         const devOnly = new RegExp(
-          `\\b(${patterns.map(escapeRe).join("|")})\\b`,
+          `\\b(${chunkTokens.map(escapeRe).join("|")})\\b`,
           "i",
         );
         await Promise.all(

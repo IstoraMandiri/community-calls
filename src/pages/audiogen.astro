@@ -5,7 +5,9 @@
 // itself loads from a CDN (it's AGPL-3.0, so we never bundle it) and the whole
 // route is stripped from prod by astro.config.mjs. The guard below redirects
 // if a dev build ever reaches a non-dev runtime.
-if (!import.meta.env.DEV) return Astro.redirect("/");
+import { devOnlyGuard } from "../lib/devOnly";
+const guard = devOnlyGuard(Astro);
+if (guard) return guard;
 ---
 
 <!doctype html>
