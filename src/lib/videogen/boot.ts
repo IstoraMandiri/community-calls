@@ -124,6 +124,8 @@ async function init(): Promise<void> {
       __timings: {
         prerollMs: number;
         postrollMs: number;
+        overlapSec: number;
+        endFadeSec: number;
         introUrl?: string;
         outroUrl?: string;
         mainAudioUrl: string;
@@ -133,6 +135,8 @@ async function init(): Promise<void> {
   ).__timings = {
     prerollMs: timeline.prerollMs,
     postrollMs: timeline.postrollMs,
+    overlapSec: timeline.overlapSec,
+    endFadeSec: timeline.endFadeSec,
     introUrl: sidecar?.intro,
     outroUrl: sidecar?.outro,
     mainAudioUrl: job.audio,

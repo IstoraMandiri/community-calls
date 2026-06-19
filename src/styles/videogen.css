@@ -337,6 +337,19 @@ body::before {
   overflow: hidden;
 }
 
+/* Fade-to-black overlay for the ending. Sits above the stage and the slide
+   overlay (z 100); opacity is set by the preview transport each frame. */
+.fade-black {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  background: #000;
+  opacity: 0;
+  z-index: 500;
+  pointer-events: none;
+}
+
 /* Center crosshair for visual alignment debugging (?guides=1). Sits above
    everything, never intercepts pointer events. */
 .center-guides {
@@ -547,27 +560,31 @@ body::before {
   text-align: center;
 }
 
-/* TOC list */
+/* TOC list — two columns so every chapter fits without a heading. */
+.og-content.toc-content {
+  inset: 56px;
+}
 .toc-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  width: 1200px;
+  column-count: 2;
+  column-gap: 40px;
+  width: 1760px;
 }
 .toc-list li {
   display: grid;
-  grid-template-columns: 80px 1fr auto;
+  grid-template-columns: 56px 1fr auto;
   align-items: baseline;
-  gap: 32px;
-  padding: 18px 32px;
+  gap: 22px;
+  padding: 16px 26px;
+  margin-bottom: 22px;
+  break-inside: avoid;
   background: rgba(17, 17, 20, 0.6);
   border: 1px solid rgba(122, 238, 168, 0.18);
   border-radius: 14px;
   font-family: var(--font-display);
-  font-size: 42px;
+  font-size: 34px;
 }
 .toc-list .num {
   font-family: var(--font-mono);
@@ -585,13 +602,13 @@ body::before {
   letter-spacing: 0.08em;
 }
 
-/* Summary body */
+/* Summary body — larger type now that the blurb is short. */
 .summary-body {
   font-family: var(--font-display);
-  font-size: 42px;
-  line-height: 1.35;
+  font-size: 62px;
+  line-height: 1.4;
   color: var(--color-text-primary);
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0;
   text-align: center;
 }
@@ -782,28 +799,9 @@ body::before {
   color: var(--color-etc-green);
 }
 .landing .samples {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
   margin-top: 16px;
-}
-.landing .samples a {
-  display: inline-block;
-  padding: 16px 28px;
-  background: rgba(122, 238, 168, 0.1);
-  border: 1px solid rgba(122, 238, 168, 0.5);
-  border-radius: 12px;
-  color: var(--color-etc-green);
-  text-decoration: none;
-  font-size: 16px;
-  letter-spacing: 0.04em;
-  transition:
-    background 200ms ease,
-    transform 200ms ease;
-}
-.landing .samples a:hover {
-  background: rgba(122, 238, 168, 0.18);
-  transform: translateY(-2px);
+  font-size: 15px;
+  line-height: 1.6;
 }
 .landing footer {
   font-size: 13px;

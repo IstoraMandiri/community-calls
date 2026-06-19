@@ -30,6 +30,7 @@ export const vizCtx = vizCanvas.getContext("2d")!;
 export const amaEl = $("ama");
 
 export const jingleAudio = $<HTMLAudioElement>("jingle-audio");
+export const fadeBlackEl = $("fade-black");
 
 export const previewAudio = $<HTMLAudioElement>("preview-audio");
 export const previewControls = $("preview-controls");

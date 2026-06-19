@@ -29,12 +29,26 @@ function withTimestamp(outPath) {
 
 import ffmpegPath from "ffmpeg-static";
 import { chromium } from "playwright";
+import { readFileSync } from "node:fs";
+import { parse as parseYaml } from "yaml";
 
-import speakers from "../src/lib/speakers.json" with { type: "json" };
+// Same registry the Astro side reads, parsed straight from the YAML (a plain
+// Node script can't reach an Astro content collection). Legacy --speaker mode
+// only; the main --job path gets avatars from the job spec.
+const speakers =
+  parseYaml(
+    readFileSync(new URL("../speakers/speakers.yaml", import.meta.url), "utf8"),
+  ) ?? {};
 
 function resolveSpeaker(name) {
-  const key = name.trim().toLowerCase();
-  return { key, ...(speakers[key] ?? {}) };
+  const lower = name.trim().toLowerCase();
+  for (const [key, rec] of Object.entries(speakers)) {
+    const names = [key, rec.displayName, ...(rec.aliases ?? [])].map((s) =>
+      String(s).toLowerCase(),
+    );
+    if (names.includes(lower)) return { key, ...rec };
+  }
+  return { key: lower };
 }
 
 function avatarUrlForGithub(login, size = 256) {
@@ -402,15 +416,22 @@ async function renderRealtime(durSec) {
   const mainSec = limitDurationSec
     ? Math.min(limitDurationSec, timings.mainDurationSec)
     : timings.mainDurationSec;
+  // Crossfade window: cap at half the (possibly --duration-capped) main length
+  // so intro and outro never overlap — same rule as timeline.ts so the MP4 and
+  // the on-page preview agree on the outro start.
+  const overlapSec = Math.max(
+    0,
+    Math.min(timings.overlapSec ?? 0, mainSec / 2),
+  );
   const totalSec = prerollSec + mainSec + postrollSec;
   console.log(
     `▸ realtime capture: ${totalSec.toFixed(2)}s (${prerollSec}s preroll + ${mainSec.toFixed(2)}s main + ${postrollSec}s postroll)`,
   );
 
-  // Build the audio track by concatenating: intro jingle + silence (so
-  // preroll = prerollSec total) + main call audio (trimmed if needed) +
-  // outro jingle + silence (so postroll = postrollSec total). The resulting
-  // file is exactly totalSec long so it lines up with the captured video.
+  // Build the audio track: intro jingle over the preroll, the main call audio,
+  // and the outro jingle over the postroll, crossfaded under the speaker at
+  // each boundary (see buildConcatAudio). The result is exactly totalSec long
+  // so it lines up with the captured video.
   const fullAudio = join(workDir, "full-audio.m4a");
   await buildConcatAudio(fullAudio, {
     introUrl: timings.introUrl,
@@ -419,6 +440,8 @@ async function renderRealtime(durSec) {
     prerollSec,
     mainSec,
     postrollSec,
+    overlapSec,
+    endFadeSec: Math.max(0, Math.min(timings.endFadeSec ?? 0, postrollSec)),
   });
 
   // Frames go to a temp dir; we need real files (not a pipe) so the concat
@@ -605,62 +628,103 @@ async function renderRealtime(durSec) {
   out = finalOut;
 }
 
-// Build a single audio file = intro jingle + silence (to fill prerollSec)
-// + main call audio (trimmed to mainSec) + outro jingle + silence (to fill
-// postrollSec). When a jingle URL is missing the slot is just silence.
+// Build the full audio track, laid out on one totalSec-long timeline and mixed
+// so the jingle crosses the slide/call boundaries instead of hard-cutting:
+//
+//   0        preroll        preroll+main                 totalSec
+//   |==intro==|=fade out=>·····call·····<=fade in=|==outro==|
+//             (overlap)                  (overlap)
+//
+// The intro opens at full over the pre-roll slides, then fades out over
+// `overlapSec` while the first speaker talks; the outro fades in under the
+// closing speaker over the last `overlapSec` of the call, then plays full over
+// the post-roll slides. A silent base of exactly totalSec fixes the length and
+// fills any gaps (e.g. when a jingle URL is missing). This mirrors the browser
+// preview (see preview.ts / timeline.ts jingleVolumeAt) so the rendered MP4 and
+// the on-page preview sound identical.
 async function buildConcatAudio(outPath, opts) {
   // ffmpeg-static segfaults on HTTP inputs in some filter graphs — always
-  // localise jingles to a temp file first.
+  // localise jingles to a temp file first. Memoised by URL so a shared
+  // intro/outro jingle (the common case — both default to the same take) is
+  // fetched and written only once.
+  const localised = new Map();
   async function localise(url, name) {
     if (!url) return null;
+    if (localised.has(url)) return localised.get(url);
     const u = url.startsWith("http") ? url : `${baseUrl}${url}`;
     const res = await fetch(u);
     if (!res.ok) die(`jingle fetch failed: ${res.status} ${u}`);
     const local = join(workDir, name);
     await writeFile(local, Buffer.from(await res.arrayBuffer()));
+    localised.set(url, local);
     return local;
   }
-  const introIn = await localise(opts.introUrl, "intro.m4a");
-  const outroIn = await localise(opts.outroUrl, "outro.m4a");
+  const introIn = await localise(opts.introUrl, "intro.mp3");
+  const outroIn = await localise(opts.outroUrl, "outro.mp3");
 
-  // ffprobe-equivalent via ffmpeg -i: we don't strictly need the jingle
-  // length; apad pads to a target duration regardless of source length.
+  // overlapSec and endFadeSec are already clamped by the caller (to half the
+  // main length, and to postrollSec, respectively); just guard a degenerate 0.
+  const { prerollSec, mainSec, postrollSec, overlapSec, endFadeSec } = opts;
+  const totalSec = prerollSec + mainSec + postrollSec;
+  const ov = Math.max(0, overlapSec);
+  const endFade = Math.max(0, endFadeSec ?? 0);
+  const ms = (s) => Math.round(s * 1000); // adelay wants integer milliseconds
+
   const args = ["-y"];
   if (introIn) args.push("-i", introIn);
   args.push("-i", opts.mainPath);
   if (outroIn) args.push("-i", outroIn);
-
-  // Stream index after -i flags
   const introIdx = introIn ? 0 : -1;
   const mainIdx = introIn ? 1 : 0;
   const outroIdx = outroIn ? mainIdx + 1 : -1;
 
-  const filters = [];
-  // Preroll: pad intro (or pure silence) to prerollSec total.
-  if (introIdx >= 0) {
+  // Silent bed pins the output to exactly totalSec and covers any gaps.
+  const filters = [
+    `anullsrc=channel_layout=stereo:sample_rate=48000:duration=${totalSec}[base]`,
+  ];
+  const mixLabels = ["[base]"];
+
+  // Intro: plays from 0, full over the preroll, fading out across [preroll,
+  // preroll+ov]. Trimmed so it doesn't bleed further into the call. The fade is
+  // only emitted when ov > 0 (afade with d=0 is a degenerate no-op/error).
+  if (introIdx >= 0 && prerollSec > 0) {
+    const fade = ov > 0 ? `,afade=t=out:st=${prerollSec}:d=${ov}` : "";
     filters.push(
-      `[${introIdx}:a]apad=whole_dur=${opts.prerollSec},atrim=duration=${opts.prerollSec},asetpts=PTS-STARTPTS[pre]`,
+      `[${introIdx}:a]atrim=duration=${prerollSec + ov},asetpts=PTS-STARTPTS${fade}[pre]`,
     );
-  } else {
-    filters.push(
-      `anullsrc=channel_layout=stereo:sample_rate=48000:duration=${opts.prerollSec}[pre]`,
-    );
+    mixLabels.push("[pre]");
   }
-  // Main: trim to mainSec.
+
+  // Main call audio: trimmed to mainSec, delayed to start after the preroll.
   filters.push(
-    `[${mainIdx}:a]atrim=duration=${opts.mainSec},asetpts=PTS-STARTPTS[main]`,
+    `[${mainIdx}:a]atrim=duration=${mainSec},asetpts=PTS-STARTPTS,adelay=${ms(prerollSec)}|${ms(prerollSec)}[main]`,
   );
-  // Postroll: pad outro (or silence) to postrollSec total.
-  if (outroIdx >= 0) {
+  mixLabels.push("[main]");
+
+  // Outro: fades in over its first `ov` seconds, then plays full; delayed so
+  // that fade-in lands under the last `ov` seconds of the call.
+  if (outroIdx >= 0 && postrollSec > 0) {
+    const outroDelay = prerollSec + mainSec - ov;
+    const fade = ov > 0 ? `,afade=t=in:st=0:d=${ov}` : "";
     filters.push(
-      `[${outroIdx}:a]apad=whole_dur=${opts.postrollSec},atrim=duration=${opts.postrollSec},asetpts=PTS-STARTPTS[post]`,
+      `[${outroIdx}:a]atrim=duration=${ov + postrollSec},asetpts=PTS-STARTPTS${fade},adelay=${ms(outroDelay)}|${ms(outroDelay)}[post]`,
     );
-  } else {
-    filters.push(
-      `anullsrc=channel_layout=stereo:sample_rate=48000:duration=${opts.postrollSec}[post]`,
-    );
+    mixLabels.push("[post]");
   }
-  filters.push(`[pre][main][post]concat=n=3:v=0:a=1[full]`);
+
+  // normalize=0 keeps each source at its own level (we want the brief overlap
+  // to sum, not duck everything); dropout_transition=0 avoids a gain bump when
+  // a source ends. Because the jingle and the speaker SUM during the crossfade
+  // windows, the peak can briefly exceed 0 dBFS — a true-peak limiter catches
+  // that so the rendered MP4 never hard-clips. level=disabled keeps it as a
+  // peak ceiling only (no makeup gain that would pump up the quiet stretches).
+  // A final afade-out over the last slide takes the whole track to silence, in
+  // step with the picture fading to black (preview.ts applyFadeBlack).
+  const endFadeOut =
+    endFade > 0 ? `,afade=t=out:st=${totalSec - endFade}:d=${endFade}` : "";
+  filters.push(
+    `${mixLabels.join("")}amix=inputs=${mixLabels.length}:normalize=0:dropout_transition=0,alimiter=level=disabled:limit=0.97${endFadeOut}[full]`,
+  );
 
   args.push(
     "-filter_complex",

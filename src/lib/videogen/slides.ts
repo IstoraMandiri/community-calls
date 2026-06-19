@@ -104,10 +104,11 @@ function tocSlide(chapters: Chapter[] | undefined): HTMLElement {
       </li>`;
     })
     .join("");
+  // No heading: "Chapters" is self-evident, and dropping it frees the vertical
+  // space the two-column list needs to fit every chapter on one slide.
   root.innerHTML = `
     ${CHROME}
-    <div class="og-content">
-      <h2 class="og-heading">Chapters</h2>
+    <div class="og-content toc-content">
       <ol class="toc-list">${items}</ol>
     </div>`;
   return root;
@@ -230,4 +231,16 @@ export function hideSlideOverlay(): void {
   mountedKey = null;
   slidesEl.classList.add("hidden");
   slidesInner.innerHTML = "";
+}
+
+// Opacity of the whole overlay (its opaque backdrop included), driven by the
+// transport so the slide deck cross-fades onto/off the live stage at the
+// pre-roll -> call and call -> post-roll boundaries instead of cutting. Called
+// every animation frame; only touches the DOM when the value actually changes
+// (it's a constant 1 across the bulk of every slide).
+let overlayOpacity = -1;
+export function setOverlayOpacity(o: number): void {
+  if (o === overlayOpacity) return;
+  overlayOpacity = o;
+  slidesEl.style.opacity = String(o);
 }

@@ -1,6 +1,7 @@
 import {
   previewAudio,
   jingleAudio,
+  fadeBlackEl,
   previewControls,
   previewPlay,
   previewRestart,
@@ -18,16 +19,21 @@ import type { Cue } from "./vtt";
 import {
   segmentAt,
   segmentIndexAt,
+  jingleVolumeAt,
   type Segment,
   type Timeline,
 } from "./timeline";
 import {
   setActiveSlide,
   hideSlideOverlay,
+  setOverlayOpacity,
   SLIDE_KEYS,
   type SlideContext,
   type SlideKey,
 } from "./slides";
+
+// Cross-fade between the slide deck and the live call stage at each boundary.
+const SLIDE_FADE_SEC = 0.6;
 
 type Ctx = {
   ready: Promise<void>;
@@ -42,6 +48,11 @@ type Ctx = {
 
 const clamp = (v: number, lo: number, hi: number) =>
   v < lo ? lo : v > hi ? hi : v;
+
+// Linear 0..1 ramp across [a, b], clamped outside. Shared by the boundary
+// cross-fades and the end fade-to-black so they all ramp the same way.
+const ramp = (t: number, a: number, b: number) =>
+  b > a ? clamp((t - a) / (b - a), 0, 1) : t >= b ? 1 : 0;
 
 // Preview transport over the whole-video timeline (preroll slides + main +
 // postroll slides). One global clock (`globalT`, in seconds) drives the
@@ -59,6 +70,11 @@ export function setupPreviewControls(ctx: Ctx): void {
   let raf = 0;
   let activeIdx = -1; // last segment index media was synced to
   let currentJingleUrl: string | null = null;
+  let jingleVol = -1; // last volume written to jingleAudio (-1 = unset)
+  // Slides adjacent to the main segment, for the boundary cross-fades.
+  let lastPrerollKey: SlideKey | null = null;
+  let firstPostrollKey: SlideKey | null = null;
+  let fadeBlackOpacity = -1; // last opacity written to the fade-to-black layer
   // Optional cap (driver --duration) that ends the main segment early.
   let mainCapSec: number | null = null;
 
@@ -105,26 +121,91 @@ export function setupPreviewControls(ctx: Ctx): void {
   function renderGlobal(t: number): void {
     if (!timeline) return;
     const seg = segmentAt(timeline, t);
+    const { mainStart, mainEnd } = timeline;
+    const fade = SLIDE_FADE_SEC;
+
+    // The slide<->stage cross-fades are a playback transition. On a paused
+    // scrub or slide-jump we skip them and show the slide at full opacity, so
+    // inspecting a boundary slide (e.g. the stats slide, whose start lands
+    // exactly at mainEnd where the fade-in opacity is 0) shows it solid rather
+    // than caught mid-transition over the held stage.
     if (seg.kind === "main") {
-      hideSlideOverlay();
-      ctx.seek(t - timeline.mainStart);
+      ctx.seek(t - mainStart);
+      // Fade the last pre-roll slide out over the opening of the call (the
+      // stage is already live underneath) instead of cutting to it.
+      if (playing && lastPrerollKey && t < mainStart + fade) {
+        setActiveSlide(lastPrerollKey, buildSlideContext);
+        setOverlayOpacity(1 - ramp(t, mainStart, mainStart + fade));
+      } else {
+        hideSlideOverlay();
+      }
     } else {
       setActiveSlide(seg.key, buildSlideContext);
+      // Fade the first post-roll slide in over the close of the call.
+      if (playing && seg.key === firstPostrollKey && t < mainEnd + fade) {
+        ctx.seek(mainEnd - mainStart); // hold the final call frame underneath
+        setOverlayOpacity(ramp(t, mainEnd, mainEnd + fade));
+      } else {
+        setOverlayOpacity(1);
+      }
     }
+    applyFadeBlack(t);
     updateScrubUI(t);
+  }
+
+  // Fade the whole stage to black over the final slide: opacity ramps 0 -> 1
+  // across [totalDuration - endFadeSec, totalDuration]. Captured by the
+  // screencast, so the rendered MP4 fades out in step with the audio. Written
+  // only when it changes (constant 0 for the whole call body otherwise).
+  function applyFadeBlack(t: number): void {
+    if (!timeline) return;
+    const { endFadeSec, totalDuration } = timeline;
+    const o =
+      endFadeSec > 0 ? ramp(t, totalDuration - endFadeSec, totalDuration) : 0;
+    if (o !== fadeBlackOpacity) {
+      fadeBlackOpacity = o;
+      fadeBlackEl.style.opacity = String(o);
+    }
   }
 
   function pauseJingle(): void {
     if (!jingleAudio.paused) jingleAudio.pause();
   }
 
-  function ensureJingle(url: string, offset: number): void {
-    if (currentJingleUrl !== url) {
-      jingleAudio.src = url;
-      currentJingleUrl = url;
+  // The jingle lives on the global timeline (intro window, then outro window),
+  // not inside a single slide group: it keeps playing across the slide/main
+  // boundary and fades under the speaker. Each frame we look up which window
+  // covers `t` and apply its volume envelope + position; outside both windows
+  // it's silent. Audible only while playing (scrubbing positions it silently).
+  function activeJingle(t: number) {
+    if (!timeline) return null;
+    for (const w of [timeline.intro, timeline.outro]) {
+      if (!w) continue;
+      const vol = jingleVolumeAt(w, t);
+      if (vol !== null) return { w, vol };
     }
-    // Jingles are short; if we've scrubbed past the jingle's length it just
-    // stays silent for the rest of the slide group.
+    return null;
+  }
+
+  function applyJingle(t: number): void {
+    const active = activeJingle(t);
+    if (!active) {
+      pauseJingle();
+      return;
+    }
+    const { w, vol } = active;
+    if (currentJingleUrl !== w.url) {
+      jingleAudio.src = w.url;
+      currentJingleUrl = w.url;
+    }
+    // Only touch .volume when it actually changes — this runs every animation
+    // frame, and the long full-volume plateau over the slides would otherwise
+    // re-assign the same value 60×/s.
+    if (vol !== jingleVol) {
+      jingleAudio.volume = vol;
+      jingleVol = vol;
+    }
+    const offset = t - w.startGlobal;
     if (
       offset >= 0 &&
       (Number.isNaN(jingleAudio.currentTime) ||
@@ -136,14 +217,15 @@ export function setupPreviewControls(ctx: Ctx): void {
         /* metadata not loaded yet — fine, it'll start from 0 */
       }
     }
-    if (playing) void jingleAudio.play().catch(() => {});
+    if (playing && jingleAudio.paused) void jingleAudio.play().catch(() => {});
+    else if (!playing && !jingleAudio.paused) jingleAudio.pause();
   }
 
-  // Start/stop the right audio when crossing into a segment.
+  // Start/stop the main call audio when crossing into a segment. The jingle is
+  // handled separately (applyJingle) since it spans boundaries.
   function onEnterSegment(seg: Segment, t: number): void {
     if (!timeline) return;
     if (seg.kind === "main") {
-      pauseJingle();
       const local = Math.max(0, t - timeline.mainStart);
       if (Math.abs(previewAudio.currentTime - local) > 0.25) {
         previewAudio.currentTime = local;
@@ -151,8 +233,6 @@ export function setupPreviewControls(ctx: Ctx): void {
       if (playing) void previewAudio.play().catch(() => {});
     } else {
       if (!previewAudio.paused) previewAudio.pause();
-      if (seg.jingleUrl) ensureJingle(seg.jingleUrl, t - seg.jingleStart);
-      else pauseJingle();
     }
   }
 
@@ -171,6 +251,7 @@ export function setupPreviewControls(ctx: Ctx): void {
     ) {
       void previewAudio.play().catch(() => {});
     }
+    applyJingle(t);
   }
 
   function frame(): void {
@@ -259,6 +340,11 @@ export function setupPreviewControls(ctx: Ctx): void {
 
   ctx.ready.then(() => {
     timeline = ctx.getTimeline();
+    const mi = timeline.segments.findIndex((s) => s.kind === "main");
+    const before = timeline.segments[mi - 1];
+    const after = timeline.segments[mi + 1];
+    lastPrerollKey = before?.kind === "slide" ? before.key : null;
+    firstPostrollKey = after?.kind === "slide" ? after.key : null;
     previewAudio.src = ctx.audioSrc;
     previewScrub.min = "0";
     previewScrub.max = String(timeline.totalDuration || 1);
@@ -318,7 +404,10 @@ export function setupPreviewControls(ctx: Ctx): void {
     if (seg) {
       seekTo(seg.start);
     } else {
+      // Ad-hoc slide not on the timeline: show it solid, clearing any
+      // fractional overlay opacity left by an interrupted boundary cross-fade.
       setActiveSlide(which as SlideKey, buildSlideContext);
+      setOverlayOpacity(1);
     }
   });
 }

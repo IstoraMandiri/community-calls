@@ -4,12 +4,14 @@ import "../styles/videogen.css";
 import "@fontsource-variable/jetbrains-mono";
 import "@fontsource/instrument-serif/400.css";
 import "@fontsource/instrument-serif/400-italic.css";
+import { devOnlyGuard } from "../lib/devOnly";
 
 // Dev-only stage for the videogen driver + live preview. All script + CSS
 // lives in src/lib/videogen/ and src/styles/videogen.css; this page is just
 // the markup shell + a boot call. The build hook in astro.config.mjs strips
 // the route and asset chunks from dist/ so none of this ships to prod.
-if (!import.meta.env.DEV) return Astro.redirect("/");
+const guard = devOnlyGuard(Astro);
+if (guard) return guard;
 ---
 
 <!doctype html>
@@ -70,6 +72,10 @@ if (!import.meta.env.DEV) return Astro.redirect("/");
       <div class="slides-inner" id="slides-inner"></div>
     </div>
 
+    <!-- Fade-to-black overlay for the ending; opacity driven by the transport
+         so both the live preview and the captured frames fade out together. -->
+    <div class="fade-black" id="fade-black"></div>
+
     <audio id="jingle-audio" preload="auto" class="hidden"></audio>
 
     <div class="loading" id="loading">
@@ -120,11 +126,12 @@ if (!import.meta.env.DEV) return Astro.redirect("/");
         <code>scripts/videogen.mjs</code> driver inject <code>window.__job</code
         >. Append <code>&amp;preview=1</code> for transport controls.
       </p>
-      <div class="samples">
-        <a href="/videogen?job=/videogen/053/job.json&preview=1"
-          >▶ Call 53 — Neo Classic (full 1:26 episode)</a
-        >
-      </div>
+      <p class="samples">
+        Process a call with the <code>/videogen</code> skill (it derives the job
+        from the call markdown and drops the audio under
+        <code>public/videogen/&lt;NN&gt;/</code>), then open
+        <code>?job=/videogen/&lt;NN&gt;/job.json&amp;preview=1</code>.
+      </p>
       <footer>dev only, gated out of production builds</footer>
     </div>
 
