@@ -108,6 +108,14 @@ const limitDurationSec = numArg("duration", null);
 // Delay the audio track by this much in the muxed MP4 so the viz "catches
 // up" with audio in the final output.
 const vizOffsetSec = numArg("viz-offset", 0.2);
+// Final-encode tuning. The realtime capture is the wall-clock floor; the
+// post-capture x264 encode is the only cheaply-shrinkable part, and a faster
+// preset cuts it several-fold. `fast` is a good speed/size balance (~2-3x
+// faster than `medium` at the same CRF, slightly larger files); `veryfast` is
+// fastest, `medium`/`slow` compress best. CRF is the quality knob (lower =
+// better + bigger).
+const encodePreset = args.preset ?? "fast";
+const encodeCrf = String(Math.trunc(numArg("crf", 20)));
 
 if (fps <= 0) die("--fps must be > 0");
 if (port <= 0) die("--port must be > 0");
@@ -593,9 +601,9 @@ async function renderRealtime(durSec) {
     "-c:v",
     "libx264",
     "-preset",
-    "medium",
+    encodePreset,
     "-crf",
-    "20",
+    encodeCrf,
     "-pix_fmt",
     "yuv420p",
     "-r",
