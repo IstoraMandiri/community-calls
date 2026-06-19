@@ -31,7 +31,8 @@ scripts/.vtt-cache/
 test-results/
 playwright-report/
 tests/videogen/fixtures/*.m4a
-# Rendered MP4s — never commit. Audio is also excluded for now (TBD where
-# video/audio data lives); vtt/meta/avatars under public/videogen/<NN>/ are fine.
+# Rendered MP4s and the raw/working audio (.m4a, often 70MB+) stay out of git.
+# The committed, distributable audio is the compressed mono <NN>/audio.mp3;
+# vtt/meta/avatars/raw.vtt under public/videogen/<NN>/ are also committable.
 public/videogen/**/*.mp4
 public/videogen/**/*.m4a

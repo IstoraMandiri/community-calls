@@ -1,0 +1,19 @@
+# Speaker registry. Keyed by short handle; `aliases` map transcript/ASR name
+# variants to one speaker. `avatar` is a file next to this yaml. Used by the
+# videogen endpoints, the call-page roster, and the render driver.
+istora:
+  displayName: Istora Mandiri
+  aliases: [Istora]
+  avatar: istora.png
+  github: istoramandiri
+diego:
+  displayName: Diego L.L.
+  aliases: [Diego]
+  avatar: diego.png
+lunar:
+  displayName: Lunar
+  avatar: lunar.webp
+iav:
+  displayName: IAV
+  aliases: [InArgentumVeritas]
+  avatar: iav.png

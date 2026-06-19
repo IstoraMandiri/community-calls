@@ -73,7 +73,10 @@ async function shot(name, url, opts = {}) {
   await page.close();
 }
 
-const call53 = "/videogen?job=/videogen/053/job.json";
+// Jobs are now derived from the call markdown via the /videogen/<NN>/ endpoints
+// (the old static public/videogen/053/* files are gone). The audio-dependent
+// shots need <NN>-audio.mp3 present under public/videogen/53/.
+const call53 = "/videogen?job=/videogen/53/job.json";
 const call53Preview = `${call53}&preview=1`;
 
 await shot("landing", "/videogen", { waitForReady: false });

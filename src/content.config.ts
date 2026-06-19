@@ -6,6 +6,13 @@ const calls = defineCollection({
   schema: z.object({
     number: z.number().optional(),
     description: z.string(),
+    // Short one/two-sentence blurb for the videogen summary slide (written by
+    // the /videogen skill). Distinct from the long-form `# AI Summary` body.
+    summary: z.string().optional(),
+    // Participants for the call-page roster + video. Names resolve against the
+    // speaker registry (speakers/speakers.yaml) for avatars; auto-populated by
+    // the /videogen skill from the transcript, then curated.
+    roster: z.array(z.string()).optional(),
     date: z.coerce.date(),
     time: z.string(),
     location: z.string(),
