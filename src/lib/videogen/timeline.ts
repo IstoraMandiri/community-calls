@@ -29,9 +29,9 @@ export const END_FADE_SEC = 2.5;
 // preview scrubber AND the driver's audio padding (both read this timeline),
 // so the two can no longer drift apart.
 const SLIDE_MS: Record<SlideKey, number> = {
-  title: 3500,
+  hero: 4500,
+  title: 6000,
   toc: 4000,
-  summary: 5000,
   stats: 5500,
   thanks: 3500,
   logo: 2500,
@@ -73,6 +73,10 @@ export type Timeline = {
   // Final audio-fade / fade-to-black window: [totalDuration - endFadeSec,
   // totalDuration]. 0 when there's no postroll to fade over.
   endFadeSec: number;
+  // Main-segment length (== mainEnd - mainStart) and the audio head-trim
+  // offset. Main local time t plays audio at `mainAudioOffsetSec + t`.
+  mainDurationSec: number;
+  mainAudioOffsetSec: number;
 };
 
 // Volume of a jingle window at a global time, or null when it isn't playing.
@@ -92,7 +96,12 @@ export function jingleVolumeAt(w: JingleWindow, t: number): number | null {
 
 type TimelineSpec = {
   meta: SidecarMeta | null;
+  // Duration of the main segment AFTER head/tail-silence trimming (i.e.
+  // last-cue-end minus first-cue-start, not the raw audio length).
   mainDurationSec: number;
+  // Audio time the main segment starts at — the head-trim offset. The main
+  // segment's local time t maps to audio time `mainAudioOffsetSec + t`.
+  mainAudioOffsetSec?: number;
   // false in noSlides mode (or when there's no sidecar meta to build from).
   includeSlides: boolean;
 };
@@ -102,9 +111,9 @@ type TimelineSpec = {
 // stats -> thanks -> logo run. Keeping this derivation in one place means the
 // exposed prerollMs/postrollMs always match what actually renders.
 function prerollKeys(meta: SidecarMeta): SlideKey[] {
-  const keys: SlideKey[] = ["title"];
+  // Brand hero, then the episode card (title + summary merged), then chapters.
+  const keys: SlideKey[] = ["hero", "title"];
   if (meta.chapters && meta.chapters.length > 0) keys.push("toc");
-  if (meta.summary) keys.push("summary");
   return keys;
 }
 
@@ -197,6 +206,8 @@ export function buildTimeline(spec: TimelineSpec): Timeline {
     intro,
     outro,
     endFadeSec,
+    mainDurationSec: mainEnd - mainStart,
+    mainAudioOffsetSec: spec.mainAudioOffsetSec ?? 0,
   };
 }
 

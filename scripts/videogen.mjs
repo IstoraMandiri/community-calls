@@ -437,6 +437,9 @@ async function renderRealtime(durSec) {
     introUrl: timings.introUrl,
     outroUrl: timings.outroUrl,
     mainPath: audioPath,
+    // Head-trim offset: the main audio starts here (cuts leading silence), so
+    // the rendered audio matches the trimmed call the browser plays.
+    mainOffsetSec: Math.max(0, timings.mainAudioOffsetSec ?? 0),
     prerollSec,
     mainSec,
     postrollSec,
@@ -665,6 +668,7 @@ async function buildConcatAudio(outPath, opts) {
   // overlapSec and endFadeSec are already clamped by the caller (to half the
   // main length, and to postrollSec, respectively); just guard a degenerate 0.
   const { prerollSec, mainSec, postrollSec, overlapSec, endFadeSec } = opts;
+  const mainOffsetSec = Math.max(0, opts.mainOffsetSec ?? 0);
   const totalSec = prerollSec + mainSec + postrollSec;
   const ov = Math.max(0, overlapSec);
   const endFade = Math.max(0, endFadeSec ?? 0);
@@ -695,9 +699,10 @@ async function buildConcatAudio(outPath, opts) {
     mixLabels.push("[pre]");
   }
 
-  // Main call audio: trimmed to mainSec, delayed to start after the preroll.
+  // Main call audio: cut leading silence (start at mainOffsetSec) and take
+  // mainSec of it, then delay to start after the preroll.
   filters.push(
-    `[${mainIdx}:a]atrim=duration=${mainSec},asetpts=PTS-STARTPTS,adelay=${ms(prerollSec)}|${ms(prerollSec)}[main]`,
+    `[${mainIdx}:a]atrim=start=${mainOffsetSec}:end=${mainOffsetSec + mainSec},asetpts=PTS-STARTPTS,adelay=${ms(prerollSec)}|${ms(prerollSec)}[main]`,
   );
   mixLabels.push("[main]");
 

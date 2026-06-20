@@ -15,9 +15,9 @@ const slidesEl = document.getElementById("slides")!;
 const slidesInner = document.getElementById("slides-inner")!;
 
 export type SlideKey =
+  | "hero"
   | "title"
   | "toc"
-  | "summary"
   | "stats"
   | "thanks"
   | "logo";
@@ -25,9 +25,9 @@ export type SlideKey =
 // Runtime list of valid keys, for validating untyped sources (e.g. a
 // data-slide attribute) before they reach buildSlide's exhaustive switch.
 export const SLIDE_KEYS: readonly SlideKey[] = [
+  "hero",
   "title",
   "toc",
-  "summary",
   "stats",
   "thanks",
   "logo",
@@ -63,27 +63,53 @@ const CHROME = `
     <div class="og-corner og-corner-bl"></div>
     <div class="og-corner og-corner-br"></div>`;
 
-function titleSlide(call: CallMeta | undefined): HTMLElement {
+// Brand opener — the landing-page hero (logo with glow/float, the big
+// "Ethereum Classic / Community Calls" wordmark with the green glow, the
+// subtitle) over a CRT scanline overlay. Reuses the global animation + glow
+// utility classes (animate-float / animate-pulse-glow / text-glow) that the
+// /videogen page already loads via index.css.
+function heroSlide(): HTMLElement {
+  const root = document.createElement("div");
+  root.className = "slide-hero";
+  root.innerHTML = `
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-logo-wrap">
+        <div class="hero-logo-glow"></div>
+        <img class="hero-logo" src="/etc-logo.svg" alt="ETC" />
+      </div>
+      <h1 class="hero-title">
+        <span>Ethereum Classic</span>
+        <span class="text-glow">Community Calls</span>
+      </h1>
+      <p class="hero-sub">
+        Regular open discussions about development,
+        <span class="hero-link">ECIPs</span>, and the future of
+        <span class="hero-link">Ethereum Classic</span>
+      </p>
+    </div>
+    <div class="hero-scanlines"></div>`;
+  return root;
+}
+
+// Episode card: centred #number/date, the title in green, and the "In this
+// episode" summary below it (the standalone summary slide is gone). Fonts match
+// the main call view's header — mono meta, Instrument-Serif green title.
+function titleSlide(
+  call: CallMeta | undefined,
+  summary: string | undefined,
+): HTMLElement {
   const root = document.createElement("div");
   root.className = "slide-title og";
   root.innerHTML = `
     ${CHROME}
-    <div class="og-stage">
-      <div class="og-logo-wrap">
-        <div class="og-logo-glow"></div>
-        <img class="og-logo" src="/etc-logo.svg" alt="ETC" />
+    <div class="og-content title-content">
+      <div class="title-meta">
+        ${call?.number != null ? `<span class="num">#${call.number}</span>` : ""}
+        ${call?.date ? `<span class="date">${fmtDateLong(call.date)}</span>` : ""}
       </div>
-      <div class="og-text">
-        <div class="og-wordmark">
-          <span class="l1">Ethereum Classic</span>
-          <span class="l2">Community Calls</span>
-        </div>
-        <div class="og-meta">
-          ${call?.number != null ? `<span class="num">#${call.number}</span>` : ""}
-          ${call?.date ? `<span class="date">${fmtDateLong(call.date)}</span>` : ""}
-        </div>
-        <h1 class="og-title">${call?.title ?? ""}</h1>
-      </div>
+      <h1 class="title-name">${call?.title ?? ""}</h1>
+      ${summary ? `<p class="title-summary">${summary}</p>` : ""}
     </div>`;
   return root;
 }
@@ -91,37 +117,15 @@ function titleSlide(call: CallMeta | undefined): HTMLElement {
 function tocSlide(chapters: Chapter[] | undefined): HTMLElement {
   const root = document.createElement("div");
   root.className = "slide-toc og";
+  // Just the chapter titles (no number, no timestamp), clamped to two lines.
   const items = (chapters ?? [])
-    .map((c, i) => {
-      const mins = Math.floor((c.end - c.start) / 60);
-      const secs = Math.round((c.end - c.start) % 60);
-      const dur = mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
-      const idx = String(i + 1).padStart(2, "0");
-      return `<li>
-        <span class="num">${idx}</span>
-        <span class="title">${c.title}</span>
-        <span class="span">${dur}</span>
-      </li>`;
-    })
+    .map((c) => `<li><span class="title">${c.title}</span></li>`)
     .join("");
-  // No heading: "Chapters" is self-evident, and dropping it frees the vertical
-  // space the two-column list needs to fit every chapter on one slide.
   root.innerHTML = `
     ${CHROME}
     <div class="og-content toc-content">
+      <h2 class="og-heading toc-heading">Topics Discussed</h2>
       <ol class="toc-list">${items}</ol>
-    </div>`;
-  return root;
-}
-
-function summarySlide(summary: string | undefined): HTMLElement {
-  const root = document.createElement("div");
-  root.className = "slide-summary og";
-  root.innerHTML = `
-    ${CHROME}
-    <div class="og-content">
-      <h2 class="og-heading">In this episode</h2>
-      <p class="summary-body">${summary ?? ""}</p>
     </div>`;
   return root;
 }
@@ -174,12 +178,12 @@ function logoSlide(): HTMLElement {
 // second dispatch in the preview switch.
 function buildSlide(key: SlideKey, ctx: SlideContext): HTMLElement {
   switch (key) {
+    case "hero":
+      return heroSlide();
     case "title":
-      return titleSlide(ctx.call);
+      return titleSlide(ctx.call, ctx.summary);
     case "toc":
       return tocSlide(ctx.chapters);
-    case "summary":
-      return summarySlide(ctx.summary);
     case "stats":
       return statsSlide(ctx.cues, ctx.participants);
     case "thanks":

@@ -108,12 +108,29 @@ async function init(): Promise<void> {
 
   w.__duration = duration;
 
+  // Trim leading/trailing dead air: the call starts at the first cue and ends
+  // at the last, so silence/pauses before the first sentence and after the last
+  // are cut automatically. A 1s buffer keeps a beat of breathing room before
+  // the first word (and after the last). Falls back to the full audio when
+  // there are no cues.
+  const TRIM_LEAD_SEC = 1.0;
+  let mainAudioOffsetSec = 0;
+  let mainDurationSec = duration;
+  if (cuesRef.length > 0 && duration > 0) {
+    const firstStart = Math.min(...cuesRef.map((c) => c.start));
+    const lastEnd = Math.max(...cuesRef.map((c) => c.end));
+    mainAudioOffsetSec = Math.max(0, firstStart - TRIM_LEAD_SEC);
+    const end = Math.min(duration, lastEnd + TRIM_LEAD_SEC);
+    mainDurationSec = Math.max(0, end - mainAudioOffsetSec);
+  }
+
   // Single source of truth for slide timing: the same timeline drives the
   // preview transport and the realtime driver's audio sizing. noSlides mode
   // (or a missing sidecar) collapses it to just the main segment.
   timeline = buildTimeline({
     meta: sidecar,
-    mainDurationSec: duration,
+    mainDurationSec,
+    mainAudioOffsetSec,
     includeSlides: !noSlides,
   });
 
@@ -130,6 +147,7 @@ async function init(): Promise<void> {
         outroUrl?: string;
         mainAudioUrl: string;
         mainDurationSec: number;
+        mainAudioOffsetSec: number;
       };
     }
   ).__timings = {
@@ -140,7 +158,9 @@ async function init(): Promise<void> {
     introUrl: sidecar?.intro,
     outroUrl: sidecar?.outro,
     mainAudioUrl: job.audio,
-    mainDurationSec: duration,
+    // Trimmed main length + head-trim offset (cut dead air at head/tail).
+    mainDurationSec: timeline.mainDurationSec,
+    mainAudioOffsetSec: timeline.mainAudioOffsetSec,
   };
   seek(0);
 }

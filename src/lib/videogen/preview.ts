@@ -121,7 +121,7 @@ export function setupPreviewControls(ctx: Ctx): void {
   function renderGlobal(t: number): void {
     if (!timeline) return;
     const seg = segmentAt(timeline, t);
-    const { mainStart, mainEnd } = timeline;
+    const { mainStart, mainEnd, mainAudioOffsetSec: off } = timeline;
     const fade = SLIDE_FADE_SEC;
 
     // The slide<->stage cross-fades are a playback transition. On a paused
@@ -130,7 +130,8 @@ export function setupPreviewControls(ctx: Ctx): void {
     // exactly at mainEnd where the fade-in opacity is 0) shows it solid rather
     // than caught mid-transition over the held stage.
     if (seg.kind === "main") {
-      ctx.seek(t - mainStart);
+      // Main local time -> audio time (offset past the trimmed head silence).
+      ctx.seek(off + (t - mainStart));
       // Fade the last pre-roll slide out over the opening of the call (the
       // stage is already live underneath) instead of cutting to it.
       if (playing && lastPrerollKey && t < mainStart + fade) {
@@ -143,7 +144,7 @@ export function setupPreviewControls(ctx: Ctx): void {
       setActiveSlide(seg.key, buildSlideContext);
       // Fade the first post-roll slide in over the close of the call.
       if (playing && seg.key === firstPostrollKey && t < mainEnd + fade) {
-        ctx.seek(mainEnd - mainStart); // hold the final call frame underneath
+        ctx.seek(off + (mainEnd - mainStart)); // hold the final call frame
         setOverlayOpacity(ramp(t, mainEnd, mainEnd + fade));
       } else {
         setOverlayOpacity(1);
@@ -226,9 +227,11 @@ export function setupPreviewControls(ctx: Ctx): void {
   function onEnterSegment(seg: Segment, t: number): void {
     if (!timeline) return;
     if (seg.kind === "main") {
-      const local = Math.max(0, t - timeline.mainStart);
-      if (Math.abs(previewAudio.currentTime - local) > 0.25) {
-        previewAudio.currentTime = local;
+      // Audio plays from the trimmed-head offset, not from 0.
+      const audioT =
+        timeline.mainAudioOffsetSec + Math.max(0, t - timeline.mainStart);
+      if (Math.abs(previewAudio.currentTime - audioT) > 0.25) {
+        previewAudio.currentTime = audioT;
       }
       if (playing) void previewAudio.play().catch(() => {});
     } else {
@@ -267,9 +270,11 @@ export function setupPreviewControls(ctx: Ctx): void {
       // mainEnd so a longer-than-decoded media element can't push the clock
       // into postroll while the call audio is still playing.
       if (!previewAudio.paused) {
+        // audio currentTime is offset past the trimmed head — back it out.
         globalT = Math.min(
           timeline.mainEnd,
-          timeline.mainStart + previewAudio.currentTime,
+          timeline.mainStart +
+            (previewAudio.currentTime - timeline.mainAudioOffsetSec),
         );
       } else {
         globalT += dt;

@@ -127,6 +127,20 @@ export default defineConfig({
   devToolbar: { enabled: false },
   vite: {
     plugins: [tailwindcss(), audiogenDevRecording],
+    // Don't reload the dev server on non-source churn — notably during a
+    // videogen render, where a stray change under .claude/, .cache/ (the
+    // render's own MP4 output), or public/ media would otherwise HMR-reload
+    // the page mid-capture and corrupt the recording.
+    server: {
+      watch: {
+        ignored: [
+          "**/.claude/**",
+          "**/.cache/**",
+          "**/public/**/*.{mp4,m4a,mp3,wav}",
+          "**/public/*.{mp4,m4a,mp3,wav}",
+        ],
+      },
+    },
   },
   markdown: {
     remarkPlugins: [remarkWebVtt],
