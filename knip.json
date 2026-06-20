@@ -13,6 +13,8 @@
     "daisyui",
     "@tailwindcss/typography",
     "@iconify-json/lucide",
-    "@iconify-json/simple-icons"
+    "@iconify-json/simple-icons",
+    "@iconify-json/ri",
+    "@iconify-json/mdi"
   ]
 }

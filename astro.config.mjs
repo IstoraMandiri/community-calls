@@ -203,10 +203,11 @@ export default defineConfig({
         ],
         // Remix Icon - Matrix room avatars (dev-only /matrix-icons preview)
         ri: [
+          "shield-check-fill",
+          "newspaper-fill",
           "megaphone-fill",
-          "chat-3-fill",
+          "discuss-fill",
           "cup-fill",
-          "cpu-fill",
           "git-branch-fill",
           "code-s-slash-fill",
           "settings-4-fill",
@@ -214,6 +215,8 @@ export default defineConfig({
           "broadcast-fill",
           "landscape-fill",
         ],
+        // Solid pickaxe for the Miners avatar (Remix has no pickaxe).
+        mdi: ["pickaxe"],
       },
     }),
   ],
