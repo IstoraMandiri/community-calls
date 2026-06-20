@@ -204,7 +204,7 @@ export default defineConfig({
         // Remix Icon - Matrix room avatars (dev-only /matrix-icons preview)
         ri: [
           "shield-check-fill",
-          "newspaper-fill",
+          "draft-fill",
           "megaphone-fill",
           "discuss-fill",
           "cup-fill",
