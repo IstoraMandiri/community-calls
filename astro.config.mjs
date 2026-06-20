@@ -209,7 +209,7 @@ export default defineConfig({
           "cpu-fill",
           "git-branch-fill",
           "code-s-slash-fill",
-          "git-merge-fill",
+          "settings-4-fill",
           "flask-fill",
           "broadcast-fill",
           "landscape-fill",
