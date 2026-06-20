@@ -23,6 +23,9 @@ const DEV_ROUTES = [
   // audiogen loads Strudel from a CDN (external URL), so it produces no vendor
   // chunk of its own; only its page chunk needs stripping.
   { name: "audiogen" },
+  // matrix-icons previews Remix Icon avatars for the Matrix rooms; the icons
+  // inline into its own page chunk, so no extra vendor chunk to strip.
+  { name: "matrix-icons" },
 ];
 
 // Strips the dev-only routes (page chunks, html, sample assets, and their
@@ -197,6 +200,18 @@ export default defineConfig({
           "newspaper",
           "globe",
           "share-2",
+        ],
+        // Remix Icon - Matrix room avatars (dev-only /matrix-icons preview)
+        ri: [
+          "megaphone-fill",
+          "chat-3-fill",
+          "cup-fill",
+          "cpu-fill",
+          "git-branch-fill",
+          "code-s-slash-fill",
+          "flask-fill",
+          "broadcast-fill",
+          "landscape-fill",
         ],
       },
     }),

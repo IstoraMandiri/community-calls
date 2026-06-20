@@ -1,0 +1,440 @@
+---
+import { Icon } from "astro-icon/components";
+import { devOnlyGuard } from "../lib/devOnly";
+
+// Dev-only preview of Matrix room avatars. Renders Remix Icon glyphs at 256x256
+// on a solid black background, in an ETC community-calls green gradient (lighter
+// at the top-left). The route is gated at runtime and stripped from dist/ by
+// stripDevRoutes in astro.config.mjs, so none of it ships to prod.
+const guard = devOnlyGuard(Astro);
+if (guard) return guard;
+
+// One entry per Matrix room. `icon` is a Remix Icon name (also listed under
+// icon.include.ri in astro.config.mjs). The main room uses the ETC logo SVG
+// instead of a Remix glyph.
+const rooms = [
+  {
+    slug: "01-announcements",
+    label: "01 - Announcements",
+    icon: "ri:megaphone-fill",
+  },
+  { slug: "02-general", label: "02 - General", icon: "ri:chat-3-fill" },
+  { slug: "03-off-topic", label: "03 - Off-Topic", icon: "ri:cup-fill" },
+  { slug: "04-miners", label: "04 - Miners", icon: "ri:cpu-fill" },
+  {
+    slug: "development",
+    label: "Development (space)",
+    icon: "ri:git-branch-fill",
+  },
+  {
+    slug: "05-developers",
+    label: "05 - Developers",
+    icon: "ri:code-s-slash-fill",
+  },
+  {
+    slug: "06-mordor-testnet",
+    label: "06 - Mordor Testnet",
+    icon: "ri:flask-fill",
+  },
+  { slug: "marketing", label: "Marketing (space)", icon: "ri:broadcast-fill" },
+  {
+    slug: "07-etc-summit",
+    label: "07 - ETC Summit",
+    icon: "ri:landscape-fill",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>matrix-icons</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Matrix room avatars</h1>
+        <p>
+          Remix Icon glyphs at 256&times;256, centered, in an ETC
+          community-calls green gradient (lighter from the top-left) on a solid
+          black background. Each preview is exactly what downloads. Grab any as
+          PNG (256&times;256) or SVG.
+        </p>
+        <button id="dl-all">Download all PNGs (ZIP)</button>
+      </header>
+
+      <div class="grid">
+        {/* Main room: the ETC logo, filled with the green gradient. */}
+        <figure
+          class="card"
+          data-slug="main-etc"
+          data-label="Main room (ETC logo)"
+        >
+          <div class="swatch">
+            <svg
+              class="glyph etc-logo"
+              viewBox="0 0 1543 2499.2"
+              fill="currentColor"
+              width="150"
+              height="243"
+            >
+              <path
+                d="M0,1361.05c271.87,144.38,555.56,295.51,774.67,412.45L1543,1361.05c-278.2,413.29-510,757.36-768.33,1138.15C515.88,2119.25,230.08,1700,0,1361.05Zm29.55-114L775.51,849l736.25,395.14L775.93,1642.63ZM774.67,721.47,0,1129.28,771.29,0,1543,1131.81,774.67,721.47Z"
+              ></path>
+              <path
+                d="M774.67,1773.5,1543,1361.05C1264.8,1774.34,774.67,2499.2,774.67,2499.2ZM775.51,849l736.25,395.14L775.93,1642.63,775.51,849Zm-.84-127.5L771.29,0,1543,1131.81Z"
+                fill-opacity="0.7"></path>
+              <path
+                d="M29.55,1247.06l746,61.22,736.25-63.75L775.93,1643.05Z"
+                fill-opacity="0.7"></path>
+              <path
+                d="M775.51,1308.28l736.25-63.75L775.93,1643.05l-.42-334.77Z"
+                fill-opacity="0.5"></path>
+            </svg>
+          </div>
+          <figcaption>
+            <span class="name">Main room (ETC logo)</span>
+            <span class="meta">etc-logo.svg</span>
+          </figcaption>
+          <div class="actions">
+            <button data-dl="png">PNG</button>
+            <button data-dl="svg">SVG</button>
+          </div>
+        </figure>
+
+        {
+          rooms.map((room) => (
+            <figure class="card" data-slug={room.slug} data-label={room.label}>
+              <div class="swatch">
+                <Icon class="glyph" name={room.icon} width={150} height={150} />
+              </div>
+              <figcaption>
+                <span class="name">{room.label}</span>
+                <span class="meta">{room.icon}</span>
+              </figcaption>
+              <div class="actions">
+                <button data-dl="png">PNG</button>
+                <button data-dl="svg">SVG</button>
+              </div>
+            </figure>
+          ))
+        }
+      </div>
+    </main>
+
+    <script>
+      const SIZE = 256;
+      const GLYPH = 150; // glyph box inside the 256 canvas (centered, padded)
+
+      // Build a standalone 256x256 avatar SVG from a card's rendered glyph:
+      // black background, glyph centered + scaled into a GLYPH-sized box, filled
+      // with a green gradient that runs lighter at the top-left.
+      // The ETC logo carries its viewBox + paths on the outer <svg>; astro-icon
+      // glyphs are sprites that wrap the path in an inner <symbol> (rendered via
+      // <use>), which does NOT rasterize when an SVG is loaded as an <img>, so
+      // we lift the symbol's raw paths out. Glyph paths use fill="currentColor";
+      // we swap that for the gradient and set the group fill for the logo's
+      // paths, which inherit rather than declare a fill. The gradient id is
+      // per-card so multiple inline previews don't collide on a shared id.
+      function buildSvg(card: HTMLElement): string {
+        const src = card.querySelector(".glyph") as SVGSVGElement;
+        // astro-icon emits the <symbol> only on an icon's FIRST occurrence;
+        // later cards using the same icon carry just a <use href="#id">. If this
+        // card has no inline symbol, resolve it from the <use> target elsewhere
+        // in the document so the standalone SVG isn't a dangling reference.
+        let symbol = src.querySelector("symbol");
+        if (!symbol) {
+          const use = src.querySelector("use");
+          const href = (
+            use?.getAttribute("href") ||
+            use?.getAttribute("xlink:href") ||
+            ""
+          ).slice(1);
+          if (href)
+            symbol = document.getElementById(href) as SVGSymbolElement | null;
+        }
+        const gradId = `g-${card.dataset.slug}`;
+        const inner = (symbol ? symbol.innerHTML : src.innerHTML).replace(
+          /currentColor/g,
+          `url(#${gradId})`,
+        );
+        const vbEl = src.getAttribute("viewBox") ? src : (symbol ?? src);
+        const vb = (vbEl.getAttribute("viewBox") || "0 0 24 24")
+          .split(/\s+/)
+          .map(Number);
+        const [, , vw, vh] = vb;
+        const scale = GLYPH / Math.max(vw, vh);
+        const tx = (SIZE - vw * scale) / 2;
+        const ty = (SIZE - vh * scale) / 2;
+        return (
+          `<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}">` +
+          `<defs><linearGradient id="${gradId}" x1="0" y1="0" x2="1" y2="1">` +
+          `<stop offset="0" stop-color="#aef6cd"/>` +
+          `<stop offset="0.55" stop-color="#7aeea8"/>` +
+          `<stop offset="1" stop-color="#57c08a"/>` +
+          `</linearGradient></defs>` +
+          `<rect width="${SIZE}" height="${SIZE}" fill="#000000"/>` +
+          `<g transform="translate(${tx} ${ty}) scale(${scale})" fill="url(#${gradId})">` +
+          inner +
+          `</g></svg>`
+        );
+      }
+
+      function download(name: string, blob: Blob) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = name;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function dlSvg(card: HTMLElement) {
+        const svg = buildSvg(card);
+        download(
+          `${card.dataset.slug}.svg`,
+          new Blob([svg], { type: "image/svg+xml" }),
+        );
+      }
+
+      // Rasterize a card's avatar SVG to a 256x256 PNG blob.
+      function pngBlob(card: HTMLElement): Promise<Blob> {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            const c = document.createElement("canvas");
+            c.width = SIZE;
+            c.height = SIZE;
+            c.getContext("2d")!.drawImage(img, 0, 0, SIZE, SIZE);
+            c.toBlob(
+              (blob) => (blob ? resolve(blob) : reject(new Error("toBlob"))),
+              "image/png",
+            );
+          };
+          img.onerror = () => reject(new Error("img load"));
+          img.src =
+            "data:image/svg+xml;base64," +
+            btoa(unescape(encodeURIComponent(buildSvg(card))));
+        });
+      }
+
+      function dlPng(card: HTMLElement) {
+        pngBlob(card).then((blob) =>
+          download(`${card.dataset.slug}.png`, blob),
+        );
+      }
+
+      // --- Minimal store-mode (no compression) ZIP writer. PNGs are already
+      // compressed, so storing them keeps the file small without a zip lib. ---
+      const crcTable = (() => {
+        const t = new Uint32Array(256);
+        for (let n = 0; n < 256; n++) {
+          let c = n;
+          for (let k = 0; k < 8; k++)
+            c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+          t[n] = c >>> 0;
+        }
+        return t;
+      })();
+      function crc32(bytes: Uint8Array): number {
+        let c = 0xffffffff;
+        for (let i = 0; i < bytes.length; i++)
+          c = crcTable[(c ^ bytes[i]) & 0xff] ^ (c >>> 8);
+        return (c ^ 0xffffffff) >>> 0;
+      }
+      function zipStore(files: { name: string; bytes: Uint8Array }[]): Blob {
+        const enc = new TextEncoder();
+        const parts: Uint8Array[] = [];
+        const central: Uint8Array[] = [];
+        let offset = 0;
+        for (const f of files) {
+          const name = enc.encode(f.name);
+          const crc = crc32(f.bytes);
+          const lh = new DataView(new ArrayBuffer(30));
+          lh.setUint32(0, 0x04034b50, true); // local file header sig
+          lh.setUint16(4, 20, true); // version needed
+          lh.setUint32(14, crc, true);
+          lh.setUint32(18, f.bytes.length, true); // compressed size
+          lh.setUint32(22, f.bytes.length, true); // uncompressed size
+          lh.setUint16(26, name.length, true);
+          parts.push(new Uint8Array(lh.buffer), name, f.bytes);
+          const cd = new DataView(new ArrayBuffer(46));
+          cd.setUint32(0, 0x02014b50, true); // central dir sig
+          cd.setUint16(4, 20, true); // version made by
+          cd.setUint16(6, 20, true); // version needed
+          cd.setUint32(16, crc, true);
+          cd.setUint32(20, f.bytes.length, true);
+          cd.setUint32(24, f.bytes.length, true);
+          cd.setUint16(28, name.length, true);
+          cd.setUint32(42, offset, true); // local header offset
+          central.push(new Uint8Array(cd.buffer), name);
+          offset += 30 + name.length + f.bytes.length;
+        }
+        const cdSize = central.reduce((s, c) => s + c.length, 0);
+        const eocd = new DataView(new ArrayBuffer(22));
+        eocd.setUint32(0, 0x06054b50, true); // end of central dir sig
+        eocd.setUint16(8, files.length, true); // records on disk
+        eocd.setUint16(10, files.length, true); // total records
+        eocd.setUint32(12, cdSize, true);
+        eocd.setUint32(16, offset, true); // central dir offset
+        return new Blob([...parts, ...central, new Uint8Array(eocd.buffer)], {
+          type: "application/zip",
+        });
+      }
+
+      async function dlAll(btn: HTMLButtonElement) {
+        const label = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Zipping...";
+        try {
+          const cards = [...document.querySelectorAll<HTMLElement>(".card")];
+          const files = await Promise.all(
+            cards.map(async (card) => ({
+              name: `${card.dataset.slug}.png`,
+              bytes: new Uint8Array(await (await pngBlob(card)).arrayBuffer()),
+            })),
+          );
+          download("matrix-icons.zip", zipStore(files));
+        } finally {
+          btn.disabled = false;
+          btn.textContent = label;
+        }
+      }
+
+      document.querySelectorAll<HTMLElement>(".card").forEach((card) => {
+        // Render the actual export SVG into the swatch so the preview is exact
+        // WYSIWYG. The original astro-icon glyph stays in the DOM (hidden) as
+        // the source buildSvg reads paths + viewBox from.
+        const svg = new DOMParser().parseFromString(
+          buildSvg(card),
+          "image/svg+xml",
+        ).documentElement;
+        svg.removeAttribute("width");
+        svg.removeAttribute("height");
+        svg.setAttribute("class", "preview");
+        const glyph = card.querySelector<HTMLElement>(".glyph")!;
+        glyph.style.display = "none";
+        card.querySelector(".swatch")!.appendChild(svg);
+
+        card
+          .querySelector('[data-dl="png"]')
+          ?.addEventListener("click", () => dlPng(card));
+        card
+          .querySelector('[data-dl="svg"]')
+          ?.addEventListener("click", () => dlSvg(card));
+      });
+
+      const dlAllBtn = document.getElementById("dl-all") as HTMLButtonElement;
+      dlAllBtn?.addEventListener("click", () => dlAll(dlAllBtn));
+    </script>
+
+    <style>
+      :global(body) {
+        margin: 0;
+        background: #0a0a0c;
+        color: #e8e8e8;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+      }
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 4rem;
+      }
+      header h1 {
+        margin: 0 0 0.5rem;
+        font-size: 1.6rem;
+      }
+      header p {
+        max-width: 62ch;
+        color: #c8c8c8;
+        line-height: 1.5;
+      }
+      #dl-all {
+        margin-top: 1rem;
+        background: #7aeea8;
+        color: #0a0a0c;
+        border: 1px solid #7aeea8;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.55rem 1.1rem;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      #dl-all:disabled {
+        opacity: 0.6;
+        cursor: progress;
+      }
+      .grid {
+        margin-top: 1.25rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.25rem;
+      }
+      .card {
+        margin: 0;
+        background: #111114;
+        border: 1px solid #1f1f24;
+        border-radius: 12px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      /* 256x256 avatar shown at 128; the export is always full 256. The injected
+         .preview SVG carries its own black background + gradient glyph. */
+      .swatch {
+        width: 128px;
+        height: 128px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #000000;
+      }
+      .preview {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      figcaption {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .name {
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .meta {
+        font-size: 0.75rem;
+        color: #888;
+        font-family: ui-monospace, monospace;
+      }
+      .actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+      button {
+        background: transparent;
+        border: 1px solid #5ac488;
+        color: #7aeea8;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.3rem 0.7rem;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #7aeea8;
+        color: #0a0a0c;
+      }
+    </style>
+  </body>
+</html>
