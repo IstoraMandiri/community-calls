@@ -44,6 +44,41 @@ mostly extraction + packaging, not new rendering work.
       exist in the timeline), captions toggle, keyboard controls.
 
 ### Open questions
-- Where do the MP3s live, and how big across all ~58 episodes?
+- Where do the MP3s live, and how big across all ~58 episodes? (see
+  [Episode media hosting](#episode-media-hosting-git-lfs-vs-external-netlify-serving))
 - Does the player replace the YouTube embed on call pages, or sit alongside it?
 - Mobile layout for a 16:9 stage.
+
+## Episode media hosting (git-lfs vs external; Netlify serving)
+
+Decide how per-episode audio (and any inline-served video) is stored and served
+in prod. This is the blocker for the [inline audio player](#inline-audio-player-videogen-driven-no-youtube)
+above — that component needs a stable, durable audio URL.
+
+**Immediate trigger:** `public/videogen/53/53-audio.mp3` (~40MB, 64k mono) is
+the first per-episode audio we'd keep. It's currently **left uncommitted** — the
+videogen skill conventions call `<NN>-audio.mp3` "committed", but there is no
+precedent yet and committing raw 40MB blobs per episode (~2GB+ across ~58
+episodes) bloats the git pack and every clone. Resolve before publishing more.
+
+### Options to weigh
+- [ ] **git-lfs** — track `public/videogen/**/*.mp3` (and maybe a downloadable
+      mp4) via LFS. Keeps "one repo" simplicity. Caveats: Netlify does **not**
+      smoothly serve LFS pointers (Netlify Large Media is deprecated/EOL), so the
+      build would need to materialize the real files, or we serve audio from
+      elsewhere anyway — which undercuts the point of LFS.
+- [ ] **External object storage + CDN** (Cloudflare R2 / B2 / S3) — upload mp3s
+      out of band, reference a stable per-episode URL. Keeps git lean, plays well
+      with Netlify (just an `<audio src>` to a CDN), and matches the existing
+      policy of gitignoring `.m4a`/`.mp4`. Likely the right answer; pick a
+      provider and a naming scheme (`<NN>-audio.mp3`).
+- [ ] **Netlify serving path** — confirm how the chosen store is fetched at
+      runtime: direct CDN URL (preferred) vs. a Netlify redirect/proxy in
+      `netlify.toml`. Note prod strips the dev-only `/videogen` route + assets,
+      so audio must NOT depend on that path.
+
+### Decision needed
+- [ ] git-lfs vs external storage (recommend external R2/B2 + CDN).
+- [ ] Where the inline player's audio URL points, and the same question for any
+      downloadable rendered mp4 (the `<YYMMDD>-etccc-<NN>.mp4` handoff output).
+- [ ] Backfill plan for existing episodes' audio once the store is chosen.
