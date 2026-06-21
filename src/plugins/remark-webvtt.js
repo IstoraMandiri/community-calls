@@ -3,6 +3,7 @@ import { visit } from "unist-util-visit";
 // runtime videogen endpoints (Vite/esbuild bundles this TS import into the
 // config graph; the plugin is no longer loadable by bare Node).
 import { parseChapters } from "../lib/videogen/chapters.ts";
+import { resolveSpeaker } from "../lib/videogen/speakers.ts";
 
 /**
  * Remark plugin that transforms ```webvtt code blocks into
@@ -86,14 +87,17 @@ function parseWebVtt(text) {
       }
 
       const startMs = rawStartMs + offsetMs;
-      const fullText = escapeHtml(rawText);
-      const speakerMatch = fullText.match(/^([^:]+):\s*(.*)/);
+      // Split speaker off the raw (unescaped) text so the speaker string can be
+      // resolved against the registry verbatim (registry aliases hold the raw
+      // Zoom name, e.g. "Cody Burns | >"). Escape the spoken text for output;
+      // the speaker label is escaped at render time.
+      const speakerMatch = rawText.match(/^([^:]+):\s*(.*)/);
       const seconds = Math.max(0, Math.floor(startMs / 1000));
       cues.push({
         start: formatMs(Math.max(0, startMs)),
         seconds,
-        speaker: speakerMatch ? speakerMatch[1] : null,
-        text: speakerMatch ? speakerMatch[2] : fullText,
+        speaker: speakerMatch ? speakerMatch[1].trim() : null,
+        text: escapeHtml(speakerMatch ? speakerMatch[2] : rawText),
       });
     }
     i++;
@@ -138,10 +142,17 @@ function renderCueRows(cues, youtube) {
       const sameSpeaker = cue.speaker && cue.speaker === prevSpeaker;
       prevSpeaker = cue.speaker;
 
-      const speaker =
-        cue.speaker && !sameSpeaker
-          ? `<span class="transcript-speaker">${cue.speaker}</span>`
+      let speaker = "";
+      if (cue.speaker && !sameSpeaker) {
+        const resolved = resolveSpeaker(cue.speaker);
+        // Prefer the registry's canonical display name over the raw Zoom label
+        // (e.g. "Cody Burns | >" → "Cody Burns"); fall back to the raw name.
+        const name = escapeHtml(resolved?.displayName ?? cue.speaker);
+        const avatar = resolved?.avatar
+          ? `<img class="transcript-avatar" src="${resolved.avatar}" alt="" width="20" height="20" loading="lazy" />`
           : "";
+        speaker = `<span class="transcript-speaker">${avatar}${name}</span>`;
+      }
       const ts = sameSpeaker
         ? ""
         : `<span class="transcript-ts">${cue.start}</span>`;

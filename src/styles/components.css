@@ -281,9 +281,23 @@ a.transcript-cue:hover {
 }
 
 .transcript-speaker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: fit-content;
+  margin-bottom: 0.25rem;
   color: var(--color-etc-green);
   font-weight: 600;
   font-size: 0.95rem;
+}
+
+.transcript-avatar {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border-radius: 9999px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .transcript-text {
