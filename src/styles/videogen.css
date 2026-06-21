@@ -687,25 +687,31 @@ body::before {
   width: 240px;
   height: 240px;
   margin-bottom: 52px;
-  /* Clearly-visible bob within the ~4.5s the slide is on screen. */
+  /* Clearly-visible bob within the ~4.5s the slide is on screen. Promote to its
+     own compositor layer so the translate is a cheap composite (otherwise the
+     filtered children below re-rasterize every frame and the bob stutters). */
   animation: hero-float 3.2s ease-in-out infinite;
+  will-change: transform;
 }
-/* Soft green halo (landing bg-etc-green/20 blur scale-150) that breathes. */
+/* Soft green halo that breathes. Animate ONLY opacity — animating its scale
+   would re-rasterize the 56px blur every frame (the choppiness). Static scale. */
 .hero-logo-glow {
   position: absolute;
   inset: 0;
   background: rgba(122, 238, 168, 0.22);
   border-radius: 50%;
   filter: blur(56px);
-  transform: scale(1.5);
+  transform: scale(1.55);
   animation: hero-glow 3.2s ease-in-out infinite;
+  will-change: opacity;
 }
+/* Static drop-shadow (a drop-shadow keyframe re-rasterizes the filter every
+   frame); the breathing halo above carries the pulse instead. */
 .hero-logo {
   position: relative;
   width: 100%;
   height: 100%;
   filter: drop-shadow(0 0 30px rgba(122, 238, 168, 0.35));
-  animation: hero-pulse 3.2s ease-in-out infinite;
 }
 @keyframes hero-float {
   0%,
@@ -719,21 +725,10 @@ body::before {
 @keyframes hero-glow {
   0%,
   100% {
-    opacity: 0.8;
-    transform: scale(1.4);
+    opacity: 0.7;
   }
   50% {
     opacity: 1;
-    transform: scale(1.7);
-  }
-}
-@keyframes hero-pulse {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 24px rgba(122, 238, 168, 0.3));
-  }
-  50% {
-    filter: drop-shadow(0 0 44px rgba(160, 255, 200, 0.55));
   }
 }
 .hero-title {

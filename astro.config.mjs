@@ -132,6 +132,12 @@ export default defineConfig({
     // render's own MP4 output), or public/ media would otherwise HMR-reload
     // the page mid-capture and corrupt the recording.
     server: {
+      // Render server (VIDEOGEN_RENDER=1) runs with HMR fully disabled: the
+      // /videogen route is dev-only (so it can't run under `astro preview`),
+      // but with no HMR, editing the website on a SEPARATE dev server can never
+      // reload the capture page and abort an in-flight render. Start it on its
+      // own random port so it never collides with your working dev server.
+      hmr: process.env.VIDEOGEN_RENDER ? false : undefined,
       watch: {
         ignored: [
           "**/.claude/**",

@@ -14,13 +14,7 @@ import type { Chapter, SidecarMeta } from "./sidecar";
 const slidesEl = document.getElementById("slides")!;
 const slidesInner = document.getElementById("slides-inner")!;
 
-export type SlideKey =
-  | "hero"
-  | "title"
-  | "toc"
-  | "stats"
-  | "thanks"
-  | "logo";
+export type SlideKey = "hero" | "title" | "toc" | "stats" | "thanks" | "logo";
 
 // Runtime list of valid keys, for validating untyped sources (e.g. a
 // data-slide attribute) before they reach buildSlide's exhaustive switch.
@@ -136,7 +130,6 @@ function statsSlide(cues: Cue[], participants: Participant[]): HTMLElement {
   root.innerHTML = `
     ${CHROME}
     <div class="og-content">
-      <h2 class="og-heading">Speaker Time</h2>
       <div class="stats-body" id="stats-body"></div>
     </div>`;
   const body = root.querySelector<HTMLElement>("#stats-body")!;

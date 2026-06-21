@@ -3,10 +3,11 @@
 // legend.
 
 import type { Cue } from "./vtt";
-import { fmt } from "./format";
 import type { Participant } from "./job";
 import { matchParticipant } from "./roster";
 import { setAvatar } from "./avatar";
+
+const SVG_NS = "http://www.w3.org/2000/svg";
 
 const COLOURS = [
   "#7aeea8",
@@ -70,7 +71,6 @@ export function renderSpeakerStats(
   participants: Participant[],
 ): void {
   const slices = computeSlices(cues, participants);
-  const grandTotal = slices.reduce((acc, s) => acc + s.secs, 0);
 
   container.innerHTML = "";
 
@@ -78,14 +78,18 @@ export function renderSpeakerStats(
   chart.className = "stats-chart";
   container.appendChild(chart);
 
-  // SVG donut. No legend / no percentages — segments are delineated by a
-  // small gap between arcs, and each speaker's avatar pins their slice.
-  const SIZE = 640;
-  const R = 250; // ring radius (avatar centres land here)
-  const STROKE = 70;
+  // Text-free speaker-time ring: a solid donut split into per-speaker wedges by
+  // radial divider lines, with each speaker's avatar sitting outside the ring
+  // and a little arrow pointing in to their wedge. No totals, no labels.
+  const SIZE = 720;
+  const c = SIZE / 2;
+  const R = 165; // ring centreline radius
+  const STROKE = 50;
+  const Rin = R - STROKE / 2;
+  const Rout = R + STROKE / 2;
   const C = 2 * Math.PI * R;
-  const AVATAR = 90;
-  const GAP_PX = 16; // visual gap between slices, in pixels of arc length
+  const AVATAR = 84;
+  const R_AV = 310; // avatar centre radius (outside the ring)
 
   const svgWrap = document.createElement("div");
   svgWrap.className = "stats-svg-wrap";
@@ -93,72 +97,70 @@ export function renderSpeakerStats(
   svgWrap.style.height = `${SIZE}px`;
   chart.appendChild(svgWrap);
 
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const svg = document.createElementNS(SVG_NS, "svg");
   svg.setAttribute("viewBox", `0 0 ${SIZE} ${SIZE}`);
   svg.setAttribute("width", String(SIZE));
   svg.setAttribute("height", String(SIZE));
   svgWrap.appendChild(svg);
 
-  // Render each slice with a small gap on each side. We achieve the gap by
-  // shrinking the dash length by GAP_PX and shifting the offset forward by
-  // GAP_PX/2 so the slice is centred within its original sweep.
+  // 1) Solid ring: each wedge is a dash sized to its sweep, butted against the
+  //    next (the divider lines provide the separation).
   let offset = 0;
   for (const s of slices) {
-    const sweep = (s.endAngle - s.startAngle) / (2 * Math.PI);
-    const fullDash = sweep * C;
-    const dash = Math.max(2, fullDash - GAP_PX);
-    const arc = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "circle",
-    );
-    arc.setAttribute("cx", String(SIZE / 2));
-    arc.setAttribute("cy", String(SIZE / 2));
+    const dash = ((s.endAngle - s.startAngle) / (2 * Math.PI)) * C;
+    const arc = document.createElementNS(SVG_NS, "circle");
+    arc.setAttribute("cx", String(c));
+    arc.setAttribute("cy", String(c));
     arc.setAttribute("r", String(R));
     arc.setAttribute("fill", "none");
     arc.setAttribute("stroke", s.colour);
     arc.setAttribute("stroke-width", String(STROKE));
     arc.setAttribute("stroke-linecap", "butt");
     arc.setAttribute("stroke-dasharray", `${dash} ${C - dash}`);
-    arc.setAttribute("stroke-dashoffset", String(-(offset + GAP_PX / 2)));
-    arc.setAttribute("transform", `rotate(-90 ${SIZE / 2} ${SIZE / 2})`);
+    arc.setAttribute("stroke-dashoffset", String(-offset));
+    arc.setAttribute("transform", `rotate(-90 ${c} ${c})`);
     svg.appendChild(arc);
-    offset += fullDash;
+    offset += dash;
   }
 
-  // Centre label
-  const centre = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  centre.setAttribute("x", String(SIZE / 2));
-  centre.setAttribute("y", String(SIZE / 2 - 8));
-  centre.setAttribute("text-anchor", "middle");
-  centre.setAttribute("fill", "rgba(232,232,232,0.9)");
-  centre.setAttribute("font-family", "Instrument Serif, serif");
-  centre.setAttribute("font-size", "48");
-  centre.textContent = fmt(grandTotal);
-  svg.appendChild(centre);
-  const sub = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  sub.setAttribute("x", String(SIZE / 2));
-  sub.setAttribute("y", String(SIZE / 2 + 30));
-  sub.setAttribute("text-anchor", "middle");
-  sub.setAttribute("fill", "rgba(200,200,200,0.55)");
-  sub.setAttribute(
-    "font-family",
-    "JetBrains Mono Variable, ui-monospace, monospace",
-  );
-  sub.setAttribute("font-size", "16");
-  sub.setAttribute("letter-spacing", "0.16em");
-  sub.textContent = "TOTAL SPEAKING";
-  svg.appendChild(sub);
-
-  // Avatar pins sitting on the donut ring at each slice midpoint.
+  // 2) Radial divider lines dissecting the ring at every wedge boundary.
   for (const s of slices) {
-    const cx = SIZE / 2 + R * Math.cos(s.midAngle);
-    const cy = SIZE / 2 + R * Math.sin(s.midAngle);
+    const a = s.startAngle;
+    const ln = document.createElementNS(SVG_NS, "line");
+    ln.setAttribute("x1", String(c + (Rin - 3) * Math.cos(a)));
+    ln.setAttribute("y1", String(c + (Rin - 3) * Math.sin(a)));
+    ln.setAttribute("x2", String(c + (Rout + 3) * Math.cos(a)));
+    ln.setAttribute("y2", String(c + (Rout + 3) * Math.sin(a)));
+    ln.setAttribute("stroke", "var(--color-void, #0a0a0c)");
+    ln.setAttribute("stroke-width", "6");
+    svg.appendChild(ln);
+  }
+
+  // 3) Per speaker: a connector line from the avatar in to its wedge, then the
+  //    avatar. Just a line (no arrowhead) tipping just outside the ring.
+  for (const s of slices) {
+    const a = s.midAngle;
+    const cosA = Math.cos(a);
+    const sinA = Math.sin(a);
+
+    const line = document.createElementNS(SVG_NS, "line");
+    line.setAttribute("x1", String(c + (R_AV - AVATAR / 2 - 4) * cosA));
+    line.setAttribute("y1", String(c + (R_AV - AVATAR / 2 - 4) * sinA));
+    line.setAttribute("x2", String(c + (Rout + 4) * cosA));
+    line.setAttribute("y2", String(c + (Rout + 4) * sinA));
+    line.setAttribute("stroke", s.colour);
+    line.setAttribute("stroke-width", "3");
+    svg.appendChild(line);
+
+    // Avatar pin outside the ring.
+    const ax = c + R_AV * cosA;
+    const ay = c + R_AV * sinA;
     const pin = document.createElement("div");
     pin.className = "stats-pin";
     pin.style.width = `${AVATAR}px`;
     pin.style.height = `${AVATAR}px`;
-    pin.style.left = `${cx - AVATAR / 2}px`;
-    pin.style.top = `${cy - AVATAR / 2}px`;
+    pin.style.left = `${ax - AVATAR / 2}px`;
+    pin.style.top = `${ay - AVATAR / 2}px`;
     pin.style.borderColor = s.colour;
     setAvatar(pin, s.participant);
     svgWrap.appendChild(pin);

@@ -34,6 +34,10 @@ import {
 
 // Cross-fade between the slide deck and the live call stage at each boundary.
 const SLIDE_FADE_SEC = 0.6;
+// The call -> first post-roll slide (speaker-time pie) gets a longer, clearly
+// perceptible fade: a 0.6s cross-dissolve between two busy frames reads as a
+// flash, so give the close of the call a proper slow fade up into the slide.
+const POSTROLL_FADE_SEC = 1.6;
 
 type Ctx = {
   ready: Promise<void>;
@@ -67,6 +71,12 @@ export function setupPreviewControls(ctx: Ctx): void {
   let globalT = 0;
   let playing = false;
   let lastWall = 0;
+  // Last observed call-audio currentTime, to detect a "playing but stalled"
+  // media element (paused === false yet currentTime frozen). When that happens
+  // the visual clock must fall back to wallclock — the page audio is only a
+  // clock here (the output audio is muxed separately), so a stalled element
+  // must never be allowed to freeze the picture.
+  let lastAudioCT = -1;
   let raf = 0;
   let activeIdx = -1; // last segment index media was synced to
   let currentJingleUrl: string | null = null;
@@ -142,10 +152,12 @@ export function setupPreviewControls(ctx: Ctx): void {
       }
     } else {
       setActiveSlide(seg.key, buildSlideContext);
-      // Fade the first post-roll slide in over the close of the call.
-      if (playing && seg.key === firstPostrollKey && t < mainEnd + fade) {
+      // Fade the first post-roll slide in over the close of the call (a longer
+      // fade than the inter-slide one so it clearly reads as a fade-up).
+      const postFade = POSTROLL_FADE_SEC;
+      if (playing && seg.key === firstPostrollKey && t < mainEnd + postFade) {
         ctx.seek(off + (mainEnd - mainStart)); // hold the final call frame
-        setOverlayOpacity(ramp(t, mainEnd, mainEnd + fade));
+        setOverlayOpacity(ramp(t, mainEnd, mainEnd + postFade));
       } else {
         setOverlayOpacity(1);
       }
@@ -161,8 +173,15 @@ export function setupPreviewControls(ctx: Ctx): void {
   function applyFadeBlack(t: number): void {
     if (!timeline) return;
     const { endFadeSec, totalDuration } = timeline;
+    // Reach full black a hair BEFORE the end and hold it solid, so the very last
+    // captured frame is fully black. The realtime screencast's final frame lands
+    // a frame or two before totalDuration; ramping exactly to totalDuration left
+    // it at ~0.99 opacity, so the ETC logo stayed faintly visible.
+    const hold = Math.min(0.4, endFadeSec * 0.3);
     const o =
-      endFadeSec > 0 ? ramp(t, totalDuration - endFadeSec, totalDuration) : 0;
+      endFadeSec > 0
+        ? ramp(t, totalDuration - endFadeSec, totalDuration - hold)
+        : 0;
     if (o !== fadeBlackOpacity) {
       fadeBlackOpacity = o;
       fadeBlackEl.style.opacity = String(o);
@@ -265,20 +284,28 @@ export function setupPreviewControls(ctx: Ctx): void {
 
     const seg = segmentAt(timeline, globalT);
     if (seg.kind === "main") {
-      // Main audio is the authority while it's actually playing, so there's
+      // Main audio is the authority while it's actually *advancing*, so there's
       // no drift over a long call; otherwise advance by wall clock. Clamp to
       // mainEnd so a longer-than-decoded media element can't push the clock
       // into postroll while the call audio is still playing.
-      if (!previewAudio.paused) {
+      //
+      // Crucially, "playing" is not enough: a media element can be unpaused yet
+      // stalled (buffering/seek), with currentTime frozen. If we slaved globalT
+      // to a frozen currentTime the whole render would freeze in place (that is
+      // exactly the preroll->main "stuck slide" failure). So require currentTime
+      // to actually move; if it isn't (paused OR stalled), advance on wallclock.
+      const ct = previewAudio.currentTime;
+      const audioAdvancing = !previewAudio.paused && ct > lastAudioCT + 1e-3;
+      if (audioAdvancing) {
         // audio currentTime is offset past the trimmed head — back it out.
         globalT = Math.min(
           timeline.mainEnd,
-          timeline.mainStart +
-            (previewAudio.currentTime - timeline.mainAudioOffsetSec),
+          timeline.mainStart + (ct - timeline.mainAudioOffsetSec),
         );
       } else {
         globalT += dt;
       }
+      lastAudioCT = ct;
       // Cap against the timeline position (not audio.currentTime) so the
       // --duration cap still fires when the audio isn't actually playing
       // (e.g. autoplay blocked), instead of running out the full call.
@@ -327,6 +354,7 @@ export function setupPreviewControls(ctx: Ctx): void {
     previewPlay.textContent = "⏸";
     activeIdx = -1; // force media re-entry for the current segment
     lastWall = performance.now();
+    lastAudioCT = -1; // reset stall tracking; first main frame re-authorities
     syncMedia(globalT);
     renderGlobal(globalT);
     cancelAnimationFrame(raf);
@@ -339,6 +367,7 @@ export function setupPreviewControls(ctx: Ctx): void {
     globalT = clamp(t, 0, timeline.totalDuration);
     activeIdx = -1;
     lastWall = performance.now();
+    lastAudioCT = -1; // a seek jumps currentTime; don't read it as "advancing"
     syncMedia(globalT);
     renderGlobal(globalT);
   }

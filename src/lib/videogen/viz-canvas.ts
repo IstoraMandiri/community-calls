@@ -41,7 +41,9 @@ export function drawViz(t: number): void {
   for (let b = 0; b < bands; b++) {
     const target = frame[b];
     const cur = vizSmooth[b];
-    const k = target > cur ? 0.45 : 0.14;
+    // Fast attack, quicker decay (0.3) than before so the wave settles back to
+    // flat promptly after speech instead of leaving a lingering resting hump.
+    const k = target > cur ? 0.45 : 0.3;
     vizSmooth[b] = cur + (target - cur) * k;
   }
   lastVizT = t;

@@ -81,8 +81,11 @@ export function computeSpectrum(
     window[i] = 0.5 * (1 - Math.cos((2 * Math.PI * i) / (fftSize - 1)));
   }
 
-  // Logarithmic band edges (Hz)
-  const minHz = 30;
+  // Logarithmic band edges (Hz). Start at 80 Hz (not sub-bass): the lowest band
+  // maps to the centre of the mirror wave (next to the speaker avatar), and
+  // sub-100 Hz room rumble there shows as a small persistent centre bump even
+  // when the speaker is at rest. High-passing it keeps the centre flat.
+  const minHz = 80;
   const maxHz = Math.min(sr / 2, 16000);
   const edges = new Float32Array(bands + 1);
   for (let i = 0; i <= bands; i++) {
@@ -100,10 +103,34 @@ export function computeSpectrum(
     re.fill(0);
     im.fill(0);
     const end = Math.min(mono.length, start + fftSize);
+    let energy = 0;
     for (let i = 0; i < end - start; i++) {
-      re[i] = mono[start + i] * window[i];
+      const s = mono[start + i];
+      energy += s * s;
+      re[i] = s * window[i];
     }
     fft(re, im);
+
+    // Soft noise gate: the log-compression below steeply amplifies tiny
+    // magnitudes, so room tone / mic noise during silence shows up as a
+    // visible "bump". Gate on the frame's RMS energy — below gateLo the bands
+    // are forced to 0, above gateHi they pass untouched, smoothstep between
+    // (the time-smoothing in viz-canvas hides any threshold flicker). Tune
+    // gateLo/gateHi if it clips quiet speech or leaves residual shimmer.
+    const rms = Math.sqrt(energy / Math.max(1, end - start));
+    // ~ -36 .. -28 dBFS: sits above the live two-mic room tone (which otherwise
+    // leaks a small "resting bump" through a lower gate) and below speech, so
+    // quiet moments paint flat while speech is untouched. Validated by rendering
+    // the wave shape offline at in-call room-tone frames (flat) vs speech (full).
+    const gateLo = 0.02,
+      gateHi = 0.045;
+    let gate =
+      rms <= gateLo
+        ? 0
+        : rms >= gateHi
+          ? 1
+          : (rms - gateLo) / (gateHi - gateLo);
+    gate = gate * gate * (3 - 2 * gate); // smoothstep
 
     const out = new Float32Array(bands);
     for (let b = 0; b < bands; b++) {
@@ -116,8 +143,8 @@ export function computeSpectrum(
         count++;
       }
       const mag = count > 0 ? sum / count : 0;
-      // log-compress + normalize roughly into 0..1
-      out[b] = Math.min(1, Math.log10(1 + mag * 20) / 1.5);
+      // log-compress + normalize roughly into 0..1, then apply the noise gate
+      out[b] = gate * Math.min(1, Math.log10(1 + mag * 20) / 1.5);
     }
     frames[f] = out;
   }
