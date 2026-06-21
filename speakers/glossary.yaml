@@ -1,0 +1,52 @@
+# Glossary of commonly mis-transcribed proper nouns and terms for ETC community
+# calls. The transcript-cleanup step (the `call-markdown` skill) treats each key
+# as the AUTHORITATIVE spelling: it replaces any listed `aliases` (known ASR
+# variants) with the key, and uses the optional `description` to judge whether a
+# fuzzy/uncertain match actually fits the context. When the agent meets a new
+# uncertain proper noun it cannot resolve here, it prompts the user and, once
+# confirmed, appends it to this file so future cleanups get it right.
+#
+# Maintained by hand + the cleanup agent. Update periodically. Call PARTICIPANTS
+# live in speakers.yaml; this file is for names/terms MENTIONED on calls plus
+# project/protocol vocabulary.
+#
+# Shape:  Canonical Name:
+#           description: optional one-line context (helps the agent disambiguate)
+#           aliases: [known ASR mishearings]   # optional
+
+# --- People mentioned on calls ---
+Phyro:
+  description: ETC community contributor / website maintainer
+  aliases: [Firo, Pharo, Fyro]
+Bob Summerwill:
+  description: ETC Cooperative; long-time Ethereum/ETC ecosystem figure
+  aliases: [Bob Sunwell, Bob Summerville, Summerwell, Bob Somerville]
+Charles Hoskinson:
+  description: Cardano founder, Ethereum co-founder
+  aliases: [Charles Oskinson, Oskinson]
+
+# --- Projects / clients / protocol terms ---
+Ethereum Classic:
+  aliases: [Sim Classic, Etherium Classic]
+ethereumclassic.org:
+  aliases: [theoremclassic.org]
+cc.ethereumclassic.org:
+  description: the community-calls site
+  aliases: [cc.theoremclassic.org]
+ECIP-1120:
+  description: Diego's proposed ETC-native alternative (etc1) to adopting eth/69
+eth/69:
+  description: Ethereum wire-protocol version; drops total difficulty from the status message
+  aliases: [F69, eth 69]
+Nethermind:
+  aliases: [Nether mine, Nethermine]
+Core-Geth:
+  aliases: [CoreGet, Core Geth]
+MESS:
+  description: Modified Exponential Subjective Scoring (ETC 51%-attack defense)
+2Miners:
+  aliases: [two miners, 2 miners]
+Antpool:
+  aliases: [AMP pool, Ant pool]
+dApp:
+  aliases: [DAP]

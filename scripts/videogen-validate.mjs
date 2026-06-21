@@ -172,14 +172,21 @@ if (rawPath) {
   const rawCues = parseCues(readFileSync(rawPath, "utf8"));
   const rawStarts = new Set(rawCues.map((c) => c.start));
   const rawEnds = new Set(rawCues.map((c) => c.end));
+  // A cleaned boundary must be a real raw boundary OR fall strictly INSIDE a raw
+  // cue. The latter is a deterministic sentence-split of a long cue (a multi-
+  // sentence cue broken into one-sentence subtitles, with the split time
+  // interpolated within the cue). Either way the boundary lies within real
+  // audio — cleanup never invents a timestamp in a gap or drops a span.
+  const insideRaw = (t) => rawCues.some((c) => t > c.start && t < c.end);
+  const ok = (t) => rawStarts.has(t) || rawEnds.has(t) || insideRaw(t);
   for (const [i, c] of cues.entries()) {
-    if (!rawStarts.has(c.start))
+    if (!ok(c.start))
       err(
-        `block ${i + 1} @ ${fmt(c.start)}: start is not a raw cue boundary — grouping must not invent timestamps`,
+        `block ${i + 1} @ ${fmt(c.start)}: start is not within any raw cue — cleanup must not invent timestamps`,
       );
-    if (!rawEnds.has(c.end))
+    if (!ok(c.end))
       err(
-        `block ${i + 1} @ ${fmt(c.start)}: end ${fmt(c.end)} is not a raw cue boundary`,
+        `block ${i + 1} @ ${fmt(c.start)}: end ${fmt(c.end)} is not within any raw cue`,
       );
   }
   if (rawCues.length && cues.length) {
@@ -197,7 +204,9 @@ if (rawPath) {
 // ---- mid-sentence split check (the grouping rule's teeth) ----
 // A same-speaker block that ends without sentence-ending punctuation and whose
 // next block is the SAME speaker is a sentence cut that Step 2.6 should merge.
-const TERMINAL = /[.?!]["'”’)\]]*$/;
+// An ellipsis is a valid terminal (a trailing-off is an intentional break, and
+// the grouping treats it as one); only a block ending mid-word should warn.
+const TERMINAL = /[.?!…]["'”’)\]]*$/;
 const splits = [];
 for (let i = 0; i < cues.length - 1; i++) {
   const a = cues[i],
