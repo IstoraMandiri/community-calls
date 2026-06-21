@@ -1,0 +1,2869 @@
+WEBVTT
+
+1
+00:00:14.620 --> 00:00:16.600
+Istora: Hello, everyone.
+
+2
+00:00:18.270 --> 00:00:20.429
+Istora: I think you're on mute, Weigo.
+
+3
+00:00:20.740 --> 00:00:22.119
+weder: Yo, can you hear me?
+
+4
+00:00:22.120 --> 00:00:24.049
+Istora: Yeah. Can you hear me?
+
+5
+00:00:24.050 --> 00:00:25.260
+weder: Yeah, I got you.
+
+6
+00:00:25.410 --> 00:00:25.870
+Istora: Awesome.
+
+7
+00:00:25.870 --> 00:00:26.510
+weder: They're going.
+
+8
+00:00:27.650 --> 00:00:29.220
+Istora: It's going very well, thanks.
+
+9
+00:00:29.330 --> 00:00:30.929
+Istora: Thanks for joining, good to see you.
+
+10
+00:00:31.500 --> 00:00:32.420
+Istora: How are you?
+
+11
+00:00:32.920 --> 00:00:49.279
+weder: It's my pleasure. Thanks for, doing it at a, you know, more… better time. Usually it's at the opposite time of the day, 11pm. It's not… not great for… I don't know, maybe, I guess it's because you're on the other side of the world. But what changed today?
+
+12
+00:00:49.830 --> 00:00:55.430
+Istora: Today we are in Europe. I'm in Europe, and I'm here with Diego, who's also in Europe.
+
+13
+00:00:55.430 --> 00:00:56.880
+Diego: Yes, hello.
+
+14
+00:00:57.270 --> 00:00:58.710
+weder: Oh, he's actually there!
+
+15
+00:00:58.710 --> 00:01:00.140
+Istora: Yeah, yeah, awesome.
+
+16
+00:01:01.930 --> 00:01:02.530
+Istora: I do.
+
+17
+00:01:02.530 --> 00:01:03.550
+weder: Diego.
+
+18
+00:01:03.550 --> 00:01:05.180
+Diego: Yeah, hi, how are you?
+
+19
+00:01:05.180 --> 00:01:06.440
+weder: Doing very well.
+
+20
+00:01:08.940 --> 00:01:11.180
+Istora: And, we go, I see he's in the room.
+
+21
+00:01:11.850 --> 00:01:12.860
+Istora: How you doing?
+
+22
+00:01:16.790 --> 00:01:18.229
+Istora: We can't hear you.
+
+23
+00:01:20.420 --> 00:01:24.439
+Istora: I think there's a mic setting that might need to be tweaked.
+
+24
+00:01:26.230 --> 00:01:28.039
+w1g0: Can you hear me now?
+
+25
+00:01:28.040 --> 00:01:28.760
+Istora: Yes.
+
+26
+00:01:28.990 --> 00:01:29.910
+Istora: Got ya.
+
+27
+00:01:30.540 --> 00:01:31.300
+w1g0: Great.
+
+28
+00:01:31.680 --> 00:01:32.889
+Istora: Thank you for joining.
+
+29
+00:01:35.410 --> 00:01:39.790
+Istora: Yeah, there's no green room this week, because, yeah, we've been…
+
+30
+00:01:39.990 --> 00:01:48.470
+Istora: in Europe at a conference, and bit tight on time, so I think we'll just jump into it straight away.
+
+31
+00:01:50.050 --> 00:01:53.399
+Istora: So… In a few seconds, I'll kick things off.
+
+32
+00:02:00.350 --> 00:02:06.429
+Istora: Okay, hello and welcome to Ethereum Classic Community Call number 54. Today is Friday, 12th of June, 2026.
+
+33
+00:02:07.390 --> 00:02:12.319
+Istora: Ethereum Classic Community Calls is a voice chat discussion about Ethereum Classic, and everyone is welcome.
+
+34
+00:02:12.540 --> 00:02:19.520
+Istora: The call will be published on YouTube, so we kindly ask that discussion stays focused on ideas rather than individuals, and let's keep it classy.
+
+35
+00:02:19.690 --> 00:02:25.890
+Istora: You can find past episodes, transcripts, subscribe to the calendar, and more at cc.theoremclassic.org.
+
+36
+00:02:26.720 --> 00:02:34.320
+Istora: This week is a bit of a special episode. Today, I'm joined in person with Diego. Yup.
+
+37
+00:02:34.320 --> 00:02:35.479
+Diego: Hello, everyone.
+
+38
+00:02:36.100 --> 00:02:38.100
+Diego: Hi, Diego. Yeah, happy to be here.
+
+39
+00:02:38.100 --> 00:02:39.630
+Istora: It's very strange…
+
+40
+00:02:39.820 --> 00:02:43.789
+Istora: Not having latency between us, and being able to speak in real time.
+
+41
+00:02:43.990 --> 00:02:47.769
+Istora: So we're taking the opportunity to do this community call while we're both
+
+42
+00:02:47.890 --> 00:02:50.879
+Istora: Currently in Prague, attending conference here.
+
+43
+00:02:51.430 --> 00:02:56.679
+Istora: We also have on this call some… Long-time contributors?
+
+44
+00:02:57.160 --> 00:03:01.290
+Istora: Shall we say hello, to Wiedergarten? How you doing?
+
+45
+00:03:04.990 --> 00:03:06.500
+Istora: I think we're on mute at the moment.
+
+46
+00:03:07.210 --> 00:03:09.209
+weder: Yo, how's everyone?
+
+47
+00:03:10.150 --> 00:03:11.190
+weder: Recall.
+
+48
+00:03:12.620 --> 00:03:15.469
+Istora: Good to see you again, after a while.
+
+49
+00:03:15.890 --> 00:03:17.060
+Istora: Glad you could join.
+
+50
+00:03:18.690 --> 00:03:19.260
+Istora: Yeah.
+
+51
+00:03:19.260 --> 00:03:25.339
+weder: I apologize, not always able to make it, but it's good to see another fresh face we haven't seen in a while as well.
+
+52
+00:03:26.590 --> 00:03:28.459
+Istora: Yeah, just like old times.
+
+53
+00:03:28.590 --> 00:03:30.270
+Istora: We also have WeGo.
+
+54
+00:03:32.490 --> 00:03:33.800
+w1g0: Hello, everybody.
+
+55
+00:03:35.240 --> 00:03:37.359
+Istora: Here we go. Good to see you.
+
+56
+00:03:37.830 --> 00:03:45.729
+Istora: And maybe we'll try and do these calls at different time zones occasionally in the future, so that people from Europe can join us more easily, and
+
+57
+00:03:46.410 --> 00:03:50.900
+Istora: Yeah, just vary in terms of, potential joiners.
+
+58
+00:03:52.280 --> 00:03:55.079
+Istora: So, this week,
+
+59
+00:03:56.110 --> 00:04:05.809
+Istora: We have just a couple of items that maybe we can talk about, but there's also just, obviously, every time, general floor for people that can bring anything they want to talk about.
+
+60
+00:04:06.270 --> 00:04:10.330
+Istora: On the agenda I have lined up is the new website.
+
+61
+00:04:10.560 --> 00:04:12.529
+Istora: And how we can tackle this.
+
+62
+00:04:12.860 --> 00:04:18.090
+Istora: And what kind of content we can add or remove, and what features we can focus on.
+
+63
+00:04:18.680 --> 00:04:24.920
+Istora: And I also wanted to take the opportunity, as Diego's here, to get into some more deep.
+
+64
+00:04:25.180 --> 00:04:26.130
+Istora: technical…
+
+65
+00:04:26.400 --> 00:04:36.719
+Istora: understandings, particularly when it comes to some of the decision-making for future Ethereum Classic features. We might touch on,
+
+66
+00:04:38.020 --> 00:04:39.470
+Istora: DevP2P.
+
+67
+00:04:39.620 --> 00:04:48.819
+Istora: and the option in front of us in terms of F69, or potentially something that's more specific to Ethereum Classic.
+
+68
+00:04:48.960 --> 00:04:51.389
+Istora: So, we can talk about that.
+
+69
+00:04:51.900 --> 00:04:58.770
+Istora: Either first, or after we talk about the website, or if there's anything else you guys want to bring up.
+
+70
+00:04:59.260 --> 00:05:01.379
+Istora: It's been a while since we've heard from
+
+71
+00:05:01.520 --> 00:05:06.719
+Istora: Weedergen and WeGo, so do you guys have anything that you would like to talk about?
+
+72
+00:05:08.140 --> 00:05:08.919
+Istora: Well, we sh…
+
+73
+00:05:09.050 --> 00:05:17.330
+weder: I think we should do your normal rounds, and then we can talk about network upgrades later, if everyone is interested.
+
+74
+00:05:19.800 --> 00:05:21.200
+Istora: Sounds good. We go.
+
+75
+00:05:21.200 --> 00:05:26.229
+w1g0: Yeah, for me, the order is not really important,
+
+76
+00:05:26.920 --> 00:05:43.699
+w1g0: So, I have some things that I would like to discuss, concerning, the website, Discord, and, also, the centralized nature of GitHub, how…
+
+77
+00:05:44.010 --> 00:05:48.600
+w1g0: We can, improve that format as well.
+
+78
+00:05:49.700 --> 00:05:50.640
+Istora: Yeah, that sounds…
+
+79
+00:05:51.150 --> 00:05:58.019
+Istora: Intriguing. What do you have in mind with the GitHub stuff? Because it is actually quite a pertinent topic.
+
+80
+00:05:58.120 --> 00:06:08.109
+Istora: That I've been thinking about as well, and particularly how we move forward, with this apparent deadlock between GitHub maintainers and
+
+81
+00:06:08.630 --> 00:06:11.390
+Istora: the whole Olympia, no Olympia…
+
+82
+00:06:11.800 --> 00:06:18.910
+Istora: schism that's currently going on, and how we move forward in that. So, if you have any, ideas.
+
+83
+00:06:19.020 --> 00:06:21.920
+Istora: Why don't you, let us know.
+
+84
+00:06:22.890 --> 00:06:28.780
+w1g0: Well, first of all, we have the, repositories.
+
+85
+00:06:29.020 --> 00:06:44.099
+w1g0: Each have their own purpose, but they also have, all have their own governance, and, I think it, is not really clear who is…
+
+86
+00:06:44.500 --> 00:07:01.500
+w1g0: yeah, maintaining which repo. So, I think the… the nature, it should be transparent that, the… who is actually able to have right permissions,
+
+87
+00:07:01.550 --> 00:07:09.139
+w1g0: In that, in that specific, repo, and also to…
+
+88
+00:07:09.340 --> 00:07:13.130
+w1g0: Bring on more people that can,
+
+89
+00:07:13.860 --> 00:07:22.470
+w1g0: That can sign, so that we are not… In this, issue that…
+
+90
+00:07:22.730 --> 00:07:31.559
+w1g0: There are not… that it does not stagnate because you need too many people signing, to proceed.
+
+91
+00:07:31.900 --> 00:07:37.080
+w1g0: And, also, well, yeah, the opposite.
+
+92
+00:07:38.230 --> 00:07:44.299
+Istora: Right. It's quite a… A balance between having enough
+
+93
+00:07:44.920 --> 00:07:52.530
+Istora: like, a minimum quorum in terms of approvals for things to get merged. I think currently on the main website, it's two.
+
+94
+00:07:52.890 --> 00:07:54.720
+Istora: approvals.
+
+95
+00:07:55.090 --> 00:08:01.160
+Istora: but also… Having, not too many, such that nothing gets merged.
+
+96
+00:08:01.400 --> 00:08:04.959
+Istora: And I think historically, it was 2, because…
+
+97
+00:08:05.380 --> 00:08:16.579
+Istora: based on the number of active contributors, it kind of fluctuates and settles somewhere, and it just happened to be two. Maybe that's too high, but I think in the current environment, it's…
+
+98
+00:08:16.780 --> 00:08:21.069
+Istora: Better to have a stalemate than one side, like, dictating.
+
+99
+00:08:21.430 --> 00:08:23.530
+Istora: Everything that's on the website.
+
+100
+00:08:24.010 --> 00:08:27.160
+Istora: And that's also why, like, having 3…
+
+101
+00:08:27.360 --> 00:08:32.020
+Istora: People that are, like, coordinating to push things forward is also a problem.
+
+102
+00:08:32.990 --> 00:08:35.530
+Istora: So… Ideally.
+
+103
+00:08:37.669 --> 00:08:44.829
+Istora: I think after this call, I… I mean, I can tell you right now from… from my understanding, so with the website repo.
+
+104
+00:08:45.350 --> 00:08:54.609
+Istora: I'm an administrator on that repo, which means I can decide which team members are in the website maintainer
+
+105
+00:08:55.080 --> 00:08:55.880
+Istora: Group.
+
+106
+00:08:56.000 --> 00:08:57.719
+Istora: And there's currently, I believe, like.
+
+107
+00:08:58.350 --> 00:09:05.680
+Istora: 7 people, I'll check right now. Most of those people are not… Actively contributing.
+
+108
+00:09:06.600 --> 00:09:11.639
+Istora: So, I'll look right now at the team for Ethereum Classic website.
+
+109
+00:09:12.770 --> 00:09:21.779
+Istora: I think it'd be great to have more contributors, as you mentioned, especially ones that are able to be active and engaged, and ideally help us
+
+110
+00:09:23.710 --> 00:09:27.329
+Istora: Like, not take sides, necessarily, but at least
+
+111
+00:09:27.990 --> 00:09:30.979
+Istora: get us past this deadlock phase. Somehow.
+
+112
+00:09:31.110 --> 00:09:33.410
+Istora: And having, like, a neutral third party that's…
+
+113
+00:09:34.040 --> 00:09:39.419
+Istora: I guess a bit like you, Wego, or Wiedergarten, being, like, committed long-term.
+
+114
+00:09:40.110 --> 00:09:42.300
+Istora: Might be helpful in this scenario.
+
+115
+00:09:42.940 --> 00:09:48.040
+Istora: So let me just open up the Teams… So…
+
+116
+00:09:50.880 --> 00:10:01.490
+Istora: Yeah, in the website maintainers team, there's actually 10 people, and that includes, Diego, Firo, myself, Elaine, Bob Sunwell's still there, I guess…
+
+117
+00:10:01.700 --> 00:10:03.699
+Istora: That can be, updated.
+
+118
+00:10:03.840 --> 00:10:04.750
+Istora: Kimmy?
+
+119
+00:10:05.060 --> 00:10:06.050
+Istora: Cody?
+
+120
+00:10:06.680 --> 00:10:11.919
+Istora: Keith Hall Barnett, The Enthusiastic As, and Christopher Mercer.
+
+121
+00:10:12.040 --> 00:10:13.870
+Istora: So that's all the people in the…
+
+122
+00:10:13.990 --> 00:10:19.800
+Istora: website team that have the ability to approve merge requests, basically. Pull requests.
+
+123
+00:10:20.170 --> 00:10:22.340
+Istora: And if two of them agree.
+
+124
+00:10:24.000 --> 00:10:27.630
+Istora: It's a little bit more complex than that, but basically.
+
+125
+00:10:28.410 --> 00:10:31.349
+Istora: If one of the people that have made a pull request
+
+126
+00:10:31.690 --> 00:10:37.380
+Istora: And one other person approves, that's not enough to get something merged, it has to be…
+
+127
+00:10:37.590 --> 00:10:41.430
+Istora: two separate… Maintainers to approve.
+
+128
+00:10:41.780 --> 00:10:43.630
+Istora: And that means that right now, like.
+
+129
+00:10:44.130 --> 00:10:49.010
+Istora: if either side of the active Olympia debate participants
+
+130
+00:10:49.180 --> 00:10:53.850
+Istora: Submits a pull request, it's unlikely to get approved, because you need at least two people.
+
+131
+00:10:54.270 --> 00:10:55.500
+Istora: If that makes sense.
+
+132
+00:10:58.390 --> 00:11:09.260
+Istora: Above me, basically, is the GitHub admin, and I believe that Cody is one of those. So Cody, has full admin…
+
+133
+00:11:09.560 --> 00:11:16.850
+Istora: Right? As far as I understand, I'm not sure, and it'd be good if, we could get, like, an organization diagram to confirm
+
+134
+00:11:17.360 --> 00:11:19.350
+Istora: What roles different people have.
+
+135
+00:11:19.670 --> 00:11:22.900
+Istora: But basically, Cody, I believe, has the ability to…
+
+136
+00:11:23.090 --> 00:11:25.960
+Istora: Remove anyone from any team, and…
+
+137
+00:11:26.290 --> 00:11:29.719
+Istora: Re-ascribe which teams have right access to the repos.
+
+138
+00:11:30.910 --> 00:11:32.930
+Istora: So that is my understanding.
+
+139
+00:11:33.290 --> 00:11:34.490
+Diego: of…
+
+140
+00:11:34.490 --> 00:11:37.090
+Istora: who controls the GitHub repos, basically?
+
+141
+00:11:41.680 --> 00:11:56.620
+weder: So, I think I understand the problem is that there's kind of a deadlock on some of your proposals. I don't know if the one that you sent for switching the Discord again went through, or if that's the one that you're talking about.
+
+142
+00:11:56.660 --> 00:12:04.620
+weder: But I'm not sure if it's possible to have an actual neutral participant in the sense that you're trying to say, because I think…
+
+143
+00:12:04.770 --> 00:12:20.410
+weder: that people are going to be picking sides on this, and the idea that one person is going to be accepted by both sides as a neutral party, I don't see anyone, at least right now, in the field of candidates that could be like that. The closest, I would say, is Cody.
+
+144
+00:12:23.580 --> 00:12:28.899
+Istora: Yeah, in terms of, like, neutrality on the Olympia topic, a lot of the pull requests are basically…
+
+145
+00:12:29.100 --> 00:12:35.870
+Istora: Determined based on Whether it's, like, If it's concerning Olympia.
+
+146
+00:12:37.060 --> 00:12:42.649
+Istora: I think it's, like, automatically a bit controversial, and for that reason, I've been, like.
+
+147
+00:12:43.040 --> 00:12:50.689
+Istora: intentionally not approving things that may mislead people into thinking that Olympia is further ahead than it is.
+
+148
+00:12:50.940 --> 00:12:57.019
+Istora: And then, contrary to that, like, the Olympia guys don't seem to be approving anything that's not related to Olympia.
+
+149
+00:12:58.620 --> 00:13:04.100
+w1g0: What I want to say on the Olympia, debate is that
+
+150
+00:13:04.680 --> 00:13:13.409
+w1g0: While, the elephant in the room is, the funding, they have a proposal.
+
+151
+00:13:13.720 --> 00:13:18.810
+w1g0: Which is heavily critiqued, because it violates the fundamentals.
+
+152
+00:13:19.070 --> 00:13:32.319
+w1g0: But in the meantime, there's also no counter-position made, so they are trying to solve a problem that no one else is solving at the moment.
+
+153
+00:13:32.950 --> 00:13:39.409
+Istora: So, actually, myself and Diego published a ECIP called 1120, which is the…
+
+154
+00:13:39.610 --> 00:13:44.460
+Istora: basically counterproposal to Olympia in terms of the mechanism of 1559.
+
+155
+00:13:44.780 --> 00:13:50.780
+Istora: So there is another option on the table, and that did finally get merged after a while.
+
+156
+00:13:51.170 --> 00:13:59.609
+Istora: Going back to the ownership structure, I've just found that Elaine… Mikey O?
+
+157
+00:13:59.980 --> 00:14:04.179
+Istora: and Cody are basically the admins of the…
+
+158
+00:14:04.450 --> 00:14:07.059
+Istora: Ethereum Classic repos, so there's 3 of them.
+
+159
+00:14:11.260 --> 00:14:12.430
+w1g0: Okay.
+
+160
+00:14:12.480 --> 00:14:25.420
+w1g0: Well, it's not only for the… because Wither Garden, pointed out for the ECIPs, but it's not only, for, that repo that we are…
+
+161
+00:14:25.420 --> 00:14:40.089
+w1g0: having some delays, I saw that on the website. There were two, requests for adding it in the applications. There, there was CryptoFlower and Saturn text.
+
+162
+00:14:40.180 --> 00:14:55.460
+w1g0: But they're still not being approved, while they only need two signatures. If somebody not agrees, okay, that's fine, put a comment, but nobody… I thought you signed one of them.
+
+163
+00:14:55.870 --> 00:14:58.519
+w1g0: So, that's, that's, in my…
+
+164
+00:14:58.720 --> 00:15:12.679
+w1g0: opinion, an issue. On the volunteer repo, I have, made a request, so, if volunteers are not being welcomed, you're not gonna grow your user base.
+
+165
+00:15:14.420 --> 00:15:15.610
+Istora: So, yeah.
+
+166
+00:15:15.770 --> 00:15:19.320
+Istora: With reference to those two additional applications.
+
+167
+00:15:19.560 --> 00:15:30.810
+Istora: I approve both of those, and just waiting for another approval. They seem to be non-controversial, not related to Olympia, so the only reason they're not being approved, I think, is just lack of…
+
+168
+00:15:31.020 --> 00:15:38.220
+Istora: activity. So it'd be good if we could get some, as mentioned, more active maintainers on the website,
+
+169
+00:15:38.590 --> 00:15:41.670
+Istora: Did you create that pull request on volunteer?
+
+170
+00:15:41.810 --> 00:15:44.760
+Istora: Recently? Or where is that?
+
+171
+00:15:45.490 --> 00:15:54.879
+w1g0: I created… I didn't… yeah, I made an issue. I don't think it's needed to be a pull request. I didn't see that in the,
+
+172
+00:15:54.990 --> 00:15:58.069
+w1g0: in the README that it needed to be a pull request, so…
+
+173
+00:15:58.680 --> 00:16:03.079
+Istora: No, you're right, you're right, I think. And, yeah, this is something that one of the
+
+174
+00:16:04.060 --> 00:16:11.209
+Istora: organization admins, i.e. Elaine, Miko, or Cody, would need to approve.
+
+175
+00:16:11.520 --> 00:16:14.910
+Istora: And maybe it's just not on their radar yet, so I will…
+
+176
+00:16:15.360 --> 00:16:19.000
+Istora: Literally right now, CC Cody into the comments on that.
+
+177
+00:16:19.480 --> 00:16:25.310
+Istora: So maybe he'll get back to us on whether Wigo can join once again as a volunteer.
+
+178
+00:16:26.090 --> 00:16:31.649
+Istora: For people that are kind of, like, recently joining Ethereum Classic.
+
+179
+00:16:32.100 --> 00:16:37.349
+Istora: We go, could you, like, maybe give just a summary of how you've been contributing in the past?
+
+180
+00:16:40.720 --> 00:16:50.159
+w1g0: Well, my contributions, in the past, have been limited, to…
+
+181
+00:16:50.420 --> 00:17:03.879
+w1g0: maintaining the Ethereum Classic website. I've been a moderator on the Discord. I've been a very,
+
+182
+00:17:04.170 --> 00:17:11.039
+w1g0: Limited time and admin, on that same Discord.
+
+183
+00:17:11.970 --> 00:17:17.880
+w1g0: And, I did some hard fork,
+
+184
+00:17:18.069 --> 00:17:30.630
+w1g0: coordination, in the sense that I did the transcripts, for the dev meetings, so that's, my,
+
+185
+00:17:32.980 --> 00:17:35.449
+w1g0: My contributions, so far.
+
+186
+00:17:36.870 --> 00:17:39.400
+Istora: And this was… would be around,
+
+187
+00:17:40.110 --> 00:17:45.840
+Istora: 2020-ish, I guess, till 22, if I remember correctly.
+
+188
+00:17:46.560 --> 00:17:47.970
+Istora: Or a bit earlier as well?
+
+189
+00:17:48.350 --> 00:17:54.030
+w1g0: Oh, I, I… I have no idea, about time.
+
+190
+00:17:54.360 --> 00:17:56.689
+w1g0: Time flies.
+
+191
+00:17:56.690 --> 00:17:58.929
+Istora: Indeed. But it's good to have you back.
+
+192
+00:17:59.180 --> 00:18:04.210
+Istora: And, you, you also… I think maybe if you are…
+
+193
+00:18:04.880 --> 00:18:10.430
+Istora: potentially becoming more involved once again. Like, the Discord front is another…
+
+194
+00:18:10.930 --> 00:18:17.799
+Istora: element that I think could also use some attention, and I think your experience there could be quite valuable.
+
+195
+00:18:20.710 --> 00:18:26.319
+w1g0: Well, yeah, it all depends a bit on, on how this,
+
+196
+00:18:27.280 --> 00:18:41.380
+w1g0: evolves, because, well, another thing that I have noticed is, that Meal Bits, Chris Yogas,
+
+197
+00:18:41.810 --> 00:18:44.379
+w1g0: They all left maintainers.
+
+198
+00:18:45.000 --> 00:18:53.179
+w1g0: Grayscale funding, I stopped. These are some fundamental…
+
+199
+00:18:53.800 --> 00:18:58.469
+w1g0: changes, I believe, that are not…
+
+200
+00:18:58.840 --> 00:19:06.420
+w1g0: Really, bad news, but they… are… Moell.
+
+201
+00:19:07.270 --> 00:19:10.210
+w1g0: Not… not really optimal as well.
+
+202
+00:19:12.100 --> 00:19:17.759
+Istora: Yeah, that's true. But I think with all… with all change, like, there's also opportunity.
+
+203
+00:19:17.880 --> 00:19:26.479
+Istora: So… like, it seems that ETC Co-op, or at least from what I understand from Cody's,
+
+204
+00:19:26.790 --> 00:19:32.569
+Istora: intentions that he's shared on Discord, is that the ETC COP would be winding down.
+
+205
+00:19:32.740 --> 00:19:34.490
+Istora: Probably sometime this year.
+
+206
+00:19:34.650 --> 00:19:37.080
+Istora: So that means that, yeah, the…
+
+207
+00:19:37.460 --> 00:19:42.720
+Istora: The volunteer community and potentially other sources of funding will need to be figured out.
+
+208
+00:19:42.860 --> 00:19:52.009
+Istora: I'm confident that there will be solutions to that, and that's partly why I'm stepping up and trying to be involved more and more, and doing these calls.
+
+209
+00:19:52.300 --> 00:19:54.479
+Istora: As well as other things in the background, which…
+
+210
+00:19:55.580 --> 00:19:58.700
+Istora: Hopefully, we'll be able to announce soon.
+
+211
+00:19:59.040 --> 00:20:04.999
+Istora: in terms of the deadlock, though.
+
+212
+00:20:06.220 --> 00:20:09.000
+Istora: I do think that even if
+
+213
+00:20:09.170 --> 00:20:16.140
+Istora: the person that comes in is not 100% neutral and has an opinion, like, everyone has opinions, right? But…
+
+214
+00:20:17.010 --> 00:20:23.229
+Istora: Being, like, having some skin in the game, and having, like, proof of contributions before.
+
+215
+00:20:23.890 --> 00:20:26.839
+Istora: Will definitely help in terms of…
+
+216
+00:20:27.000 --> 00:20:30.849
+Istora: Being an active maintainer, and having a voice in that discussion.
+
+217
+00:20:31.450 --> 00:20:41.380
+Istora: Because… really, I don't think it's necessarily… a problem… based on… like…
+
+218
+00:20:42.530 --> 00:20:51.970
+Istora: the community doesn't know what to do. It's more just, there's not that many people that are active maintainers, and that's been, like, an opportunity,
+
+219
+00:20:53.160 --> 00:21:03.749
+Istora: for one side or the other to be pushed without really much engagement with the wider community. So I think right now is really a good time for more of those voices to be heard.
+
+220
+00:21:05.610 --> 00:21:06.940
+Istora: as maintainers.
+
+221
+00:21:07.680 --> 00:21:18.340
+w1g0: Well, the… if… The ETC co-op is going away, and there's another party stepping up.
+
+222
+00:21:18.740 --> 00:21:26.519
+w1g0: That's, well, it's replacing the central entity with another central entity.
+
+223
+00:21:26.610 --> 00:21:41.359
+w1g0: in… in an ideal world, we would have, several entities, like, while the other, was not really, ideal as well. But I really liked the…
+
+224
+00:21:41.530 --> 00:21:44.949
+w1g0: How can I say the…
+
+225
+00:21:46.350 --> 00:21:57.260
+w1g0: the ecosystem when, Charles, Oskinson was there with their Mantis team, and this coordination, and all… all… it was,
+
+226
+00:21:57.500 --> 00:22:06.270
+w1g0: it was interesting. The only thing that was not that interesting was that the Mantis team was not really on top of things, and they were more asking.
+
+227
+00:22:06.430 --> 00:22:18.110
+w1g0: questions, but if you have two teams that are knowledgeable, you can have, interesting discussions, and I think that was, lacking in the past.
+
+228
+00:22:19.790 --> 00:22:30.050
+Istora: Yeah, and I do actually think that, if anything, this Olympia, Period. Has… Caused a lot of…
+
+229
+00:22:30.160 --> 00:22:39.199
+Istora: Activity. Almost like kicking the hornet's nest and creating either people responding or, like, at least some activity.
+
+230
+00:22:39.550 --> 00:22:45.079
+Istora: And, again, like, I do appreciate that Olympia authors have
+
+231
+00:22:45.390 --> 00:22:51.339
+Istora: made an effort to do something. And that in itself is… A good sign that…
+
+232
+00:22:52.420 --> 00:23:00.219
+Istora: at least something's happening, and us responding to that is also a good sign. Myself responding to that is also a good sign, so…
+
+233
+00:23:00.640 --> 00:23:07.009
+Istora: The only thing that I really hope we can get back to is having this dialogue, and…
+
+234
+00:23:08.030 --> 00:23:11.319
+Istora: Currently, people are not speaking to each other, and that…
+
+235
+00:23:11.530 --> 00:23:15.040
+Istora: prevents any progress, basically. And it's…
+
+236
+00:23:15.570 --> 00:23:25.710
+Istora: it's gonna be difficult to move forward unless we start… restart that dialogue. And that can be done on purely technical conversations without having any, necessarily.
+
+237
+00:23:25.830 --> 00:23:35.000
+Istora: personal engagement on a… Like, it can be just purely conceptual engagement, I think.
+
+238
+00:23:35.150 --> 00:23:37.000
+Istora: As a… as a next step forward.
+
+239
+00:23:37.540 --> 00:23:42.680
+Istora: And part of that is… I think leading us nicely into…
+
+240
+00:23:42.910 --> 00:23:47.530
+Istora: The first… or maybe we can start talking about this technical…
+
+241
+00:23:48.220 --> 00:23:52.400
+Istora: element of the agenda, on F… 69.
+
+242
+00:23:52.630 --> 00:23:58.020
+Istora: Which, I was talking in the Olympia Discord earlier today.
+
+243
+00:23:58.510 --> 00:24:04.939
+Istora: And Cody was mentioning about, some… I'll read the quote verbatim.
+
+244
+00:24:05.110 --> 00:24:11.669
+Istora: So… on the topic of why Cody was not joining these community calls.
+
+245
+00:24:12.310 --> 00:24:14.899
+Istora: He basically said that,
+
+246
+00:24:15.770 --> 00:24:19.700
+Istora: He's thinking about the depth and breadth of
+
+247
+00:24:21.250 --> 00:24:24.630
+Istora: the tree search during healing of SnapSync.
+
+248
+00:24:25.550 --> 00:24:28.860
+Istora: F69 plus behavior during handshake.
+
+249
+00:24:29.240 --> 00:24:31.889
+Istora: DNS versus discovery for peer discovery.
+
+250
+00:24:32.770 --> 00:24:39.339
+Istora: And… He said that some things, he doesn't care about other people's opinions, but some things he does.
+
+251
+00:24:39.690 --> 00:24:42.859
+Istora: And the community call was not a place to have this conversation.
+
+252
+00:24:43.250 --> 00:24:45.850
+Istora: So I thought it might be nice for us to have this conversation.
+
+253
+00:24:46.150 --> 00:24:48.480
+Istora: And given that we have Diego.
+
+254
+00:24:48.640 --> 00:24:57.800
+Istora: With us, who has written on the topic, on… F69, I thought, Why don't we…
+
+255
+00:24:58.150 --> 00:25:01.750
+Istora: potentially move things forward by starting a purely technical discussion?
+
+256
+00:25:01.750 --> 00:25:03.209
+Diego: Yeah, absolutely.
+
+257
+00:25:03.350 --> 00:25:07.889
+Diego: Yeah, just, two weeks ago, I started to…
+
+258
+00:25:07.900 --> 00:25:24.419
+Diego: kind of research. Yeah, we were thinking about upcoming network upgrades, and what to include, and what to… can be delayed, and so on. So one of the things that popped out was, this change that, Ethereum made, on their
+
+259
+00:25:24.760 --> 00:25:39.040
+Diego: network layer by upgrading their version of the protocol, and so, right now, the consensus on Ethereum Classic runs on top of the ETH68 specification.
+
+260
+00:25:39.400 --> 00:25:45.319
+Diego: And that change will be, like, or should be discussed as part of a network upgrade.
+
+261
+00:25:45.450 --> 00:25:47.950
+Diego: It's not just that, like.
+
+262
+00:25:48.060 --> 00:25:58.719
+Diego: one team or one person could decide on what to do with the network layer. So, yeah, just for having some context or more information, it's that, like.
+
+263
+00:25:58.900 --> 00:26:02.269
+Diego: like, two, two weeks ago, I started this research.
+
+264
+00:26:02.400 --> 00:26:10.719
+Diego: And… and I posted, an article, I, I'm just, opened a substack.
+
+265
+00:26:10.930 --> 00:26:24.519
+Diego: So we can share the link in the notes. But, basically, there I went through, like, why it's not a good idea of, adopting the changes on ETH69 for a proof-of-work network.
+
+266
+00:26:24.580 --> 00:26:39.280
+Diego: Basically, the main change there, or the thing that will prevent it to be an option for proof-of-work network, is that, in 69, they dropped the total difficulty from the status message.
+
+267
+00:26:39.630 --> 00:26:49.389
+Diego: And that changed a lot, and it makes sense for a proof-of-stake chain, because they don't need it, and actually, they had set a total terminal difficulty.
+
+268
+00:26:49.610 --> 00:26:55.759
+Diego: So… For them, that… for them, that was just noise. So they remove it.
+
+269
+00:26:56.020 --> 00:27:01.530
+Diego: There were some other things that may be positive for a protocol.
+
+270
+00:27:01.750 --> 00:27:08.670
+Diego: In, in the, new version, like, for example, dropping bloom filters on…
+
+271
+00:27:09.000 --> 00:27:10.820
+Diego: Things like that, that will…
+
+272
+00:27:11.070 --> 00:27:21.320
+Diego: shrink the size of the packages, and I think that's… that's good, but the problem about adopting 69 in the same way that it was published for Ethereum is that
+
+273
+00:27:21.540 --> 00:27:24.060
+Diego: They are basically dropping the total difficulty there.
+
+274
+00:27:24.270 --> 00:27:33.700
+Diego: The problems that are tied to… to it is that… well, basically, it's an historical thing, it's an historical situation that has been…
+
+275
+00:27:33.950 --> 00:27:41.599
+Diego: settled a long time ago. There was a back and forth in the past, about, this very same…
+
+276
+00:27:42.260 --> 00:27:48.389
+Diego: field, and, like, the… well, this is more extensively in,
+
+277
+00:27:48.580 --> 00:27:53.129
+Diego: like, explain in… in my article. But basically.
+
+278
+00:27:53.340 --> 00:28:01.059
+Diego: it… the first version was, 61, ETH61, then, it didn't have,
+
+279
+00:28:01.870 --> 00:28:06.480
+Diego: It had… initially, it had total difficulty, then they removed it in 62.
+
+280
+00:28:06.600 --> 00:28:20.329
+Diego: And then I think it was added back later on. Basically, that change was made in 2015, so that's when the total difficulty was finally added.
+
+281
+00:28:21.670 --> 00:28:25.349
+Diego: That was for… for solving, and…
+
+282
+00:28:25.820 --> 00:28:28.380
+Diego: like, the bootstrapping of a node. Basically.
+
+283
+00:28:28.690 --> 00:28:43.390
+Diego: it will… so it… this exists way before the specification of a SnapSync, so it solves a really early problem about syncing the blockchain and a proof-of-work chain.
+
+284
+00:28:43.500 --> 00:28:47.570
+Diego: Basically, the consensus says that, the…
+
+285
+00:28:47.900 --> 00:28:52.179
+Diego: The canonical chain will be the one with more total difficulty on it.
+
+286
+00:28:52.540 --> 00:28:58.819
+Diego: So, that's what it's, reflected into the network, the networking layer.
+
+287
+00:28:59.490 --> 00:29:02.479
+Diego: So, let's say if we drop that message.
+
+288
+00:29:02.720 --> 00:29:06.579
+Diego: Then, the only thing that we can use for choosing
+
+289
+00:29:06.680 --> 00:29:09.910
+Diego: Which fork to follow will be the longest one.
+
+290
+00:29:10.120 --> 00:29:11.350
+Diego: And that's…
+
+291
+00:29:11.520 --> 00:29:22.430
+Diego: That's not the right signal for a proof-of-wall network. Because, for example, if you are syncing from scratch, and you have to pick on which node to follow.
+
+292
+00:29:22.680 --> 00:29:30.680
+Diego: If you only choose, by… by the longest one, which… which one of your nodes has the longest chain.
+
+293
+00:29:31.430 --> 00:29:42.669
+Diego: And you pick the longest one, that longest one could trick you and build a really long… really long chain, but with really low difficulty.
+
+294
+00:29:42.910 --> 00:29:44.610
+Diego: And that would be a problem.
+
+295
+00:29:44.880 --> 00:29:45.900
+Diego: So…
+
+296
+00:29:46.320 --> 00:29:52.919
+Diego: This decision of following the terminal difficulty will be that, okay, the first thing is that you have to trust.
+
+297
+00:29:53.100 --> 00:29:54.810
+Diego: Which node to follow.
+
+298
+00:29:54.960 --> 00:29:59.630
+Diego: But with the messages itself, you will be able to…
+
+299
+00:30:00.160 --> 00:30:13.090
+Diego: to prove that you are able to reach the announced total difficulty. So basically, that's why it's so important to have the total difficulty as part of the status message.
+
+300
+00:30:13.310 --> 00:30:21.109
+Diego: And… So, for SnapSync, that came way later in this…
+
+301
+00:30:21.870 --> 00:30:27.199
+Diego: This, research, or this development of the network protocol.
+
+302
+00:30:27.440 --> 00:30:34.870
+Diego: It's not a huge problem, because you're already starting from a network that is advanced in total difficulty terms.
+
+303
+00:30:35.010 --> 00:30:36.610
+Istora: So…
+
+304
+00:30:36.610 --> 00:30:39.939
+Diego: In that case, you can say that you are kind of safe.
+
+305
+00:30:40.290 --> 00:30:47.720
+Diego: Because you will have to replicate a network that is longer, but at the same time has enough terminal difficulty.
+
+306
+00:30:48.320 --> 00:30:53.739
+Diego: Because at some point, you will have to complete, what you are snap-syncing.
+
+307
+00:30:53.900 --> 00:30:55.530
+Diego: And you will check
+
+308
+00:30:55.910 --> 00:31:02.980
+Diego: the upcoming, blocks to connect into your, into your chain, and your chain will not accept
+
+309
+00:31:03.250 --> 00:31:06.339
+Diego: Blocks with… without a proper…
+
+310
+00:31:06.980 --> 00:31:15.660
+Diego: terminal difficulty. So, in that case, you can say, yeah, we are sort of safe, but the main problem arises on the… on the full sync.
+
+311
+00:31:16.950 --> 00:31:22.410
+Diego: So, basically, that's a brief explanation on why it's not a good idea.
+
+312
+00:31:22.780 --> 00:31:24.330
+Diego: That being said.
+
+313
+00:31:24.670 --> 00:31:32.459
+Diego: And what I said at the beginning, there are certain things that are interesting, on ETH69 and that could be adopted.
+
+314
+00:31:32.630 --> 00:31:39.819
+Diego: But if we want to do that, it might be the right time to start thinking about having our own protocol.
+
+315
+00:31:39.980 --> 00:31:48.900
+Diego: And that's something that has to be agreed among, the different clients, and… and it's important, and it's something to…
+
+316
+00:31:49.350 --> 00:31:57.930
+Diego: To be decided, and to think about, a migration, and probably, like, a transition, because we will have some times where both
+
+317
+00:31:58.180 --> 00:32:03.729
+Diego: Protocols should coexist, and then eventually one will be dropped in favor of the other.
+
+318
+00:32:03.860 --> 00:32:12.859
+Diego: If we go down that path, probably, like, we can name it ETC slash 1, or ETCS slash any number that we…
+
+319
+00:32:13.340 --> 00:32:19.939
+Diego: decided to be the first one, the first protocol that will be native for EDC.
+
+320
+00:32:20.190 --> 00:32:28.280
+Diego: In that one, we will, adopt these changes, like, dropping, them…
+
+321
+00:32:28.770 --> 00:32:30.759
+Diego: Some things of, of,
+
+322
+00:32:31.310 --> 00:32:45.449
+Diego: like, like, the Bloom filters, also some things that is… they are for history spire, that are, like, there are… those are features that we don't have yet, but, Ethereum has the building and putting the building blocks.
+
+323
+00:32:45.810 --> 00:32:50.049
+Diego: For… for in the future, maybe, discussing about,
+
+324
+00:32:50.100 --> 00:33:06.600
+Diego: expired in the history, but those are things that we can put in place. But I think that's part of a broader conversation, and… but I think it has to be treated in the same way as any other protocol upgrade, and that's the way, as Ethereum has been
+
+325
+00:33:06.950 --> 00:33:10.309
+Diego: Doing for this type of changes.
+
+326
+00:33:10.460 --> 00:33:23.150
+Diego: Because basically, in the end, it could, result into chain split. It will not be strictly a consensus one, but it will be, like, at the communication or networking layer.
+
+327
+00:33:24.770 --> 00:33:39.740
+Diego: So, yes, I think it will be good if people are interested in this to read the article I put in. I think it's, yeah, has some interesting information. I made some…
+
+328
+00:33:40.190 --> 00:33:50.830
+Diego: diagrams there to… to explain more how it works, how it all works. But, yeah, in a not-so-small nutshell, I think that's… that's all.
+
+329
+00:33:53.860 --> 00:34:04.500
+Istora: Could you, give, like, a… just a… To step back, for… for the…
+
+330
+00:34:05.140 --> 00:34:10.659
+Istora: from a higher level view, like, how does DevP2P And the protocol?
+
+331
+00:34:10.800 --> 00:34:22.039
+Istora: like, interact with each other in the client. And… Given that the… Like, these are two separate…
+
+332
+00:34:22.300 --> 00:34:26.480
+Istora: layers, DevP2P not being part of the core protocol. Yes.
+
+333
+00:34:26.580 --> 00:34:43.919
+Diego: So, you have… first, you have the, like, a discovery protocol, which is the Catmelia, and this exchange of messages that you have… you send a hello, then you receive a ping, and you respond with a pong, and then you will be asked for your neighbors, and all that.
+
+334
+00:34:43.989 --> 00:34:55.230
+Diego: Once that connection is established is when the secondary protocol kicks in, and that's when you start talking to peers, and then it's
+
+335
+00:34:55.650 --> 00:35:04.249
+Diego: like, basically, When you pick up which, node to follow among your networks, or the ones that you…
+
+336
+00:35:04.360 --> 00:35:05.540
+Diego: You already know.
+
+337
+00:35:06.040 --> 00:35:12.779
+Istora: And the worry is that if you are preferentially communicating with the wrong
+
+338
+00:35:12.830 --> 00:35:19.110
+Istora: peer, because it's advertising information that's less relevant to proof of work. Yep.
+
+339
+00:35:19.120 --> 00:35:21.520
+Istora: that could cause issues with syncing.
+
+340
+00:35:21.520 --> 00:35:33.020
+Diego: Yes, I mean, that node will probably follow what the longest chain. I mean, and there is also something interesting about how, and this is also part of your portfolio, how a client should decide
+
+341
+00:35:33.150 --> 00:35:40.930
+Diego: The first thing that they do is also exchanging capabilities, and they will pick the biggest one.
+
+342
+00:35:41.070 --> 00:35:54.499
+Diego: So, if we have, like, two clients, or we have, yeah, two clients with, 69, in this case, implemented, they will prefer connecting among them using 69.
+
+343
+00:35:55.050 --> 00:36:03.570
+Diego: And that will create, like, a… like, a cluster in a network, like a communication among them only.
+
+344
+00:36:03.860 --> 00:36:07.860
+Diego: And that's also a risk, and it's a… it's definitely an attack vector.
+
+345
+00:36:07.860 --> 00:36:09.099
+Istora: I see.
+
+346
+00:36:09.960 --> 00:36:16.669
+Istora: And what would be the motivation for going to 69 from what we have now? Like, apart from the…
+
+347
+00:36:16.780 --> 00:36:20.039
+Istora: The state… the bloom filter removal.
+
+348
+00:36:20.520 --> 00:36:30.520
+Istora: Is there, like, conceivably some, like, interoperability path potential that's beneficial to follow Eth long-term?
+
+349
+00:36:30.520 --> 00:36:31.539
+Diego: Well…
+
+350
+00:36:31.820 --> 00:36:38.929
+Diego: Not necessarily at this level, because they are dropping a lot of things that are,
+
+351
+00:36:39.030 --> 00:36:46.520
+Diego: not important for them. Like, for example, it has been signaled… it's signaled that, in the upcoming
+
+352
+00:36:46.550 --> 00:36:57.489
+Diego: release versions of it, they were going to drop messages that are really important for the synchronization of a proof of our chain, basically a proof-of-work chain.
+
+353
+00:36:57.490 --> 00:37:07.570
+Diego: Which is the advertisement of new blogs and new blog hashes, because now they… they got that information from the consensus layer, so they don't need those messages anymore.
+
+354
+00:37:07.640 --> 00:37:20.169
+Diego: So, like, following blindly what Ethereum does is, like, a dead end, basically, because, I mean, they are going through their own agenda of, like, dropping everything they don't need, which makes sense.
+
+355
+00:37:20.270 --> 00:37:25.899
+Diego: But, yeah, it doesn't make sense to follow them blindly in this…
+
+356
+00:37:26.100 --> 00:37:27.300
+Diego: In this particular case.
+
+357
+00:37:27.300 --> 00:37:40.900
+Istora: Right. And the interoperability benefits that you would get from other parts of the EVM, like smart contracts, they don't apply. Yeah, no. Because we're just talking between ETC nodes. We don't need to be compatible with Ethereum nodes at all.
+
+358
+00:37:40.900 --> 00:37:44.789
+Diego: Yeah, no, not anymore. I think, actually.
+
+359
+00:37:45.620 --> 00:37:53.189
+Diego: Yeah, it could be positive, because when you're syncing, you're getting a lot of noise from…
+
+360
+00:37:53.550 --> 00:37:57.930
+Diego: From other nodes that are not Specifically,
+
+361
+00:37:58.050 --> 00:38:02.459
+Diego: for ETC, so I think it might be actually beneficial.
+
+362
+00:38:02.600 --> 00:38:08.700
+Istora: Right. So, instead of trying to follow the F6970 path.
+
+363
+00:38:09.150 --> 00:38:19.930
+Istora: it's better to just start our own with ETC One. Yeah, probably. And then we can design it specifically for ETC's needs, and maybe adopt future changes.
+
+364
+00:38:20.080 --> 00:38:23.319
+Istora: But primarily, like, not try to…
+
+365
+00:38:23.850 --> 00:38:29.269
+Istora: Fight or work around a protocol that's not designed for proof of work.
+
+366
+00:38:29.810 --> 00:38:33.259
+Diego: Yes, and basically, it's important to…
+
+367
+00:38:33.290 --> 00:38:50.029
+Diego: I mean, to… to be aware of that this very same protocol is the same one that has been serving the network for the last more than 10 years. So we have been on top of this protocol for… I'm checking the dates here, for 11 years.
+
+368
+00:38:50.080 --> 00:38:51.440
+Diego: The very same one.
+
+369
+00:38:52.000 --> 00:39:01.720
+Diego: So, like, rushing now on changing it, yeah, it has… it has to be something that has to be really well thought and discussed. Right.
+
+370
+00:39:01.820 --> 00:39:06.540
+Istora: Is this the kind of… Change, assuming it doesn't require a hard fork.
+
+371
+00:39:06.750 --> 00:39:09.659
+Istora: That would make more sense to do in a…
+
+372
+00:39:09.950 --> 00:39:13.979
+Istora: Like, non… if you're gonna do an upgrade.
+
+373
+00:39:14.180 --> 00:39:21.619
+Istora: don't tie it to a hard fork, right? You could… you could do it at any time, essentially, and you could do it in a way that's easier to…
+
+374
+00:39:21.840 --> 00:39:24.840
+Istora: Like, in a gradiented way.
+
+375
+00:39:25.040 --> 00:39:29.440
+Istora: Like, so you're not just switching everything in one go, in one upgrade?
+
+376
+00:39:29.440 --> 00:39:36.029
+Diego: Yes, yes, and… yeah, and that's interesting. Yeah, with the proper coordination.
+
+377
+00:39:36.170 --> 00:39:36.970
+Istora: like…
+
+378
+00:39:36.970 --> 00:39:45.730
+Diego: Different or multiple protocols could coexist, and that's an interesting path forward.
+
+379
+00:39:45.930 --> 00:40:01.930
+Diego: for these type of changes, because, I mean, you may have part of the network connecting or exchanging messages in one version of the protocol, and some others with the other, and… yeah, that's something that can be done, and…
+
+380
+00:40:01.930 --> 00:40:05.399
+Istora: And you could have it as a feature flag that people opt into? Yep.
+
+381
+00:40:05.430 --> 00:40:08.190
+Istora: And then upgrade in a much safer way.
+
+382
+00:40:08.460 --> 00:40:11.909
+Diego: Yes, actually, like, for example, Besu, they have,
+
+383
+00:40:12.230 --> 00:40:16.289
+Diego: The flag that, that says what's the maximum version
+
+384
+00:40:16.750 --> 00:40:24.769
+Diego: Of the protocol. I mean, of course, if we are changing the prefix, and not being ETH and being ETC, and, well.
+
+385
+00:40:25.150 --> 00:40:38.920
+Diego: probably there should be… there will be some things that have to be adjusted, but, overall, the mechanisms are there. I don't know exactly about the other plans, but I know for sure that Besu has that flag.
+
+386
+00:40:40.510 --> 00:40:47.280
+Istora: Could you, explain, like, the worst case scenario in terms of an actual attack?
+
+387
+00:40:47.590 --> 00:40:49.219
+Istora: That might happen if…
+
+388
+00:40:49.790 --> 00:40:53.390
+Istora: there was an Ethereum Classic client using S69.
+
+389
+00:40:53.390 --> 00:41:01.889
+Diego: Yes, I mean, the worst, thing that could happen will be that, you could create a cluster
+
+390
+00:41:02.290 --> 00:41:12.539
+Diego: Of, like, a completely new state among a set of clients that they never realized that they had been tricked by.
+
+391
+00:41:12.950 --> 00:41:20.480
+Diego: Malicious, player that they announced a really high block number.
+
+392
+00:41:20.740 --> 00:41:30.060
+Diego: with, like, a fakely, created… I mean, it had… I mean, it would be actual proof of work, but it would be probably way…
+
+393
+00:41:30.290 --> 00:41:37.490
+Diego: less difficulty than the… than the longest chain, or the canonical one. I don't want to be the… the longest one, the canonical one.
+
+394
+00:41:37.490 --> 00:41:38.290
+Istora: The heaviest chain.
+
+395
+00:41:38.290 --> 00:41:39.399
+Diego: The heaviest chain, yes.
+
+396
+00:41:39.640 --> 00:41:42.840
+Istora: So this would create a chain split based on the network partition?
+
+397
+00:41:42.840 --> 00:41:48.840
+Diego: Yes, yes. So, yeah, that's… that will be the main… the main problem. Yeah. I see.
+
+398
+00:41:50.360 --> 00:41:56.039
+Istora: And it's particularly… Relevant to SnapSync.
+
+399
+00:41:57.730 --> 00:41:59.730
+Istora: Do I understand that correctly?
+
+400
+00:41:59.730 --> 00:42:02.499
+Diego: No, well, no, actually, for SnapSync.
+
+401
+00:42:03.140 --> 00:42:21.329
+Diego: you could say that you will be safe if you upgrade to ETH69. I mean, in terms of ETH69, let's say that happens, and you only have SnapSync as your syncing mechanism, you could say you are… you could be quite safe, because
+
+402
+00:42:21.330 --> 00:42:24.709
+Diego: Even if you get… if you pick
+
+403
+00:42:24.940 --> 00:42:42.919
+Diego: the longest, chain announced by a peer, that peer will have to send you a block that will connect to your existing chain. And for doing that, that, that, malicious had to send you,
+
+404
+00:42:43.160 --> 00:42:46.300
+Diego: A blog with enough difficulty in it.
+
+405
+00:42:46.430 --> 00:42:50.210
+Diego: So, in that case, we can say we are pretty safe.
+
+406
+00:42:50.370 --> 00:42:53.929
+Diego: But, the main problem will be for the full sinks, which…
+
+407
+00:42:54.030 --> 00:42:59.230
+Diego: In my particular opinion, I think full sync is the most important aspect of a blockchain.
+
+408
+00:42:59.230 --> 00:43:00.030
+Istora: Right.
+
+409
+00:43:00.030 --> 00:43:07.569
+Diego: I agree that it's good to have snap syncs or protocols that are more user-friendly.
+
+410
+00:43:07.740 --> 00:43:10.940
+Diego: But, yes, I have a…
+
+411
+00:43:11.490 --> 00:43:14.419
+Diego: like, I can say quite large,
+
+412
+00:43:15.920 --> 00:43:31.079
+Diego: opinions about, history, Spire, and those sort of things that, yeah, I would probably have to research way more, but so far, I think the most beautiful mechanism that the blockchain has is the full sync property. Right.
+
+413
+00:43:32.210 --> 00:43:37.979
+Istora: Wego, I see you had a question. Did you want to… Jump in now?
+
+414
+00:43:38.860 --> 00:43:42.210
+w1g0: Yeah, sure. I was wondering, this,
+
+415
+00:43:42.400 --> 00:43:51.929
+w1g0: Starting from zero, which makes sense, since the consensus mechanism is completely different.
+
+416
+00:43:51.960 --> 00:44:03.149
+w1g0: if it would have, any complications, implications, for the smart contracts, that get ported from Ethereum, on ETC, if they're…
+
+417
+00:44:03.300 --> 00:44:10.819
+w1g0: maybe, like, an attack factor, in, I don't know, in different up codes or something, I don't know.
+
+418
+00:44:11.170 --> 00:44:14.970
+Diego: No, no, no, no, thankfully, no, these are two orthogonal.
+
+419
+00:44:15.080 --> 00:44:17.949
+Diego: Yeah, aspects of the, of the chain.
+
+420
+00:44:18.260 --> 00:44:19.080
+Istora: Great.
+
+421
+00:44:21.960 --> 00:44:27.960
+Istora: Right, it's really just the network layer, and peer discovery, and syncing.
+
+422
+00:44:27.960 --> 00:44:41.190
+Diego: Yeah, it's also about consistency, because, I mean, we have a mechanism, a fork choice mechanism, within the network, the consensus, let's say, which is that you will never connect to your chain
+
+423
+00:44:41.310 --> 00:44:51.630
+Diego: a block that has lesser difficulty than the one that you already know that it's the best one. And if we drop that into the network layer, we will have another
+
+424
+00:44:51.930 --> 00:44:59.300
+Diego: yeah, and another concept there for picking, for picking up, which will be the…
+
+425
+00:45:00.180 --> 00:45:12.109
+w1g0: I think that would be really interesting, for me personally, I think, and I think it would be helpful for other people that are, less technical.
+
+426
+00:45:12.300 --> 00:45:26.130
+w1g0: is to have a animated, video on how, a client, miners, knows, distribution of ETC,
+
+427
+00:45:26.290 --> 00:45:37.510
+w1g0: currency, how this really, works, and maybe how these certain, changes proposed would affect
+
+428
+00:45:37.620 --> 00:45:43.360
+w1g0: like, people, I think… oh, well, I don't know why this,
+
+429
+00:45:43.640 --> 00:45:54.789
+w1g0: so little, traction on ETC, but, first of all, it would be that people just follow, the crowd, and they're on EAT.
+
+430
+00:45:55.210 --> 00:45:58.450
+w1g0: And Solana, I guess,
+
+431
+00:45:58.940 --> 00:46:05.789
+w1g0: But secondly, I think there's also the history of the 51% attacks.
+
+432
+00:46:06.020 --> 00:46:11.380
+w1g0: Which maybe are not really clear to people what they are, but…
+
+433
+00:46:11.560 --> 00:46:16.280
+w1g0: They might, say that, It's,
+
+434
+00:46:16.660 --> 00:46:22.400
+w1g0: unsafe, and I think that maybe an animation, on the consensus,
+
+435
+00:46:23.270 --> 00:46:27.029
+w1g0: Would, well, visualize, make it
+
+436
+00:46:27.300 --> 00:46:43.729
+w1g0: Because, well, we all have different learning styles, and for people who are more visual and auditory, or some documents might not really, explain it well.
+
+437
+00:46:45.590 --> 00:46:52.009
+Istora: Yeah, I totally agree, and it kind of ties into the next topic with the website.
+
+438
+00:46:52.260 --> 00:47:00.350
+Istora: if you do check out the article that Diego published, which I'll add to the, the show notes after this call.
+
+439
+00:47:00.510 --> 00:47:08.199
+Istora: There are some diagrams on there that try to explain how the protocol is communicating between peers.
+
+440
+00:47:08.440 --> 00:47:11.369
+Istora: In both 68 and 69.
+
+441
+00:47:11.760 --> 00:47:17.589
+Istora: in a visual way. It's not a video, but yeah, it would be great if there was kind of like a…
+
+442
+00:47:18.580 --> 00:47:19.380
+Diego: Is it 3…
+
+443
+00:47:19.380 --> 00:47:22.940
+Istora: 3 blue, 1 brown?
+
+444
+00:47:23.350 --> 00:47:31.409
+Istora: style YouTube video explaining how, the various aspects of ETC actually work under the hood.
+
+445
+00:47:31.660 --> 00:47:36.309
+Istora: Because there's… there are some pretty esoteric stuff in there, and like…
+
+446
+00:47:36.830 --> 00:47:44.030
+Istora: In ETC world, there's probably only a handful of people that really understand how it works, so it'd be good to have more people that do.
+
+447
+00:47:44.320 --> 00:47:48.540
+Istora: Even though it's less technical, and I put myself in that category as well.
+
+448
+00:47:51.200 --> 00:47:54.040
+Istora: And I'm thinking, like, on…
+
+449
+00:47:54.440 --> 00:47:58.969
+Istora: Actually, yeah, before we move on to the website, were there any…
+
+450
+00:47:59.830 --> 00:48:06.600
+Istora: comments or questions about F69 from the… Participants?
+
+451
+00:48:14.060 --> 00:48:18.319
+w1g0: For me, well, this, sounds,
+
+452
+00:48:18.860 --> 00:48:30.259
+w1g0: acceptable, but I'm not technical enough to… to understand. I have a broad idea what's happening, but I cannot voice,
+
+453
+00:48:30.490 --> 00:48:31.979
+w1g0: Any opinions?
+
+454
+00:48:32.270 --> 00:48:32.920
+Istora: Yeah.
+
+455
+00:48:33.040 --> 00:48:38.400
+Istora: So, for a bit of, like, background context, the…
+
+456
+00:48:38.870 --> 00:48:45.270
+Istora: some of the clients that have been worked on by the Olympia guys, are implementing F69.
+
+457
+00:48:45.530 --> 00:48:52.559
+Istora: and it's kind of like a technical decision that I think is worthy of more conversation.
+
+458
+00:48:53.060 --> 00:48:54.450
+Istora: And…
+
+459
+00:48:55.390 --> 00:49:05.600
+Istora: part of the reason that I'm bringing it up here is because Cody specifically mentioned this protocol earlier today as something that, is kind of just decided that's happening.
+
+460
+00:49:05.800 --> 00:49:09.229
+Istora: Similar to Olympia. But I think, definitely.
+
+461
+00:49:09.580 --> 00:49:23.830
+Istora: maybe is not the best choice, and there's definitely room for debate in there, and I think having a forum to discuss those technical aspects is exactly what this call is supposed to be about, and I hope that this forum
+
+462
+00:49:24.350 --> 00:49:28.650
+Istora: Can be hosting that kind of debate as it has done in the past.
+
+463
+00:49:28.930 --> 00:49:33.399
+Istora: But that requires the participation from, from both sides. So…
+
+464
+00:49:34.000 --> 00:49:36.440
+Istora: It's almost like an open invitation to…
+
+465
+00:49:36.560 --> 00:49:43.140
+Istora: even if it's just purely technical discussions, I still think there's value for everyone to participate in them.
+
+466
+00:49:43.450 --> 00:49:51.130
+Istora: And this… F6869 thing is just another one of those examples. And I hope that…
+
+467
+00:49:51.320 --> 00:49:54.279
+Istora: maybe Cody can either…
+
+468
+00:49:55.110 --> 00:50:01.100
+Istora: respond to this in Discord, or maybe even join a call, where we can have these technical debates once again.
+
+469
+00:50:02.190 --> 00:50:08.830
+w1g0: I want to pick in on that, and I think that Cody is right. I think as
+
+470
+00:50:09.220 --> 00:50:17.130
+w1g0: there might be, or there probably are, very technical people in the ETC community,
+
+471
+00:50:17.340 --> 00:50:33.750
+w1g0: I saw it was also a question in the community calls, where should these technical discussions be held? And I think that, that's really for a deaf call, where people are really technical and can…
+
+472
+00:50:33.930 --> 00:50:41.590
+w1g0: pick up, you… there's no harm in, explaining a technical issue in the community calls.
+
+473
+00:50:41.790 --> 00:50:47.010
+w1g0: But I don't think that the community call is a good forum, for…
+
+474
+00:50:47.450 --> 00:50:50.850
+w1g0: Yeah, making decisions on technical issues.
+
+475
+00:50:52.420 --> 00:50:57.170
+Istora: Yeah, that's a fair point. If there was a developer call.
+
+476
+00:50:58.070 --> 00:51:02.739
+Istora: I'd be more than happy to join that and discuss things there.
+
+477
+00:51:02.920 --> 00:51:06.940
+Istora: But in lieu of that, this is, like, the only call. So…
+
+478
+00:51:08.630 --> 00:51:11.560
+Istora: There doesn't really seem to be any other option.
+
+479
+00:51:12.090 --> 00:51:20.259
+Istora: than having this call for both the technical side and the community aspect, but I would love to join a developer call as well.
+
+480
+00:51:21.840 --> 00:51:26.609
+w1g0: Yeah, that's also a historical point, because we have a…
+
+481
+00:51:27.440 --> 00:51:35.590
+w1g0: For quite some time, a, a dev… a dev chat on the…
+
+482
+00:51:36.780 --> 00:51:42.250
+w1g0: On the Discord, but it's… it's really not being used,
+
+483
+00:51:42.740 --> 00:51:47.719
+w1g0: And I think it's more, well, how can I say,
+
+484
+00:51:48.190 --> 00:51:56.219
+w1g0: something that's… that's not a habit. It was just not a habit for devs to have their discussion.
+
+485
+00:51:56.420 --> 00:52:06.170
+w1g0: Whether it's for core, protocol, explanations, or for Layer 2 app,
+
+486
+00:52:07.140 --> 00:52:26.240
+w1g0: questions… well, there was never… there's never been, a back and forth between, like, yeah, how should we do this smart contract, or how should a client, respond to this behavior? Well, that's… that's something I would have
+
+487
+00:52:27.270 --> 00:52:40.589
+w1g0: thought that would have been interesting to follow, like, somebody who is not technical and is willing to learn. There's not really much documentation around.
+
+488
+00:52:42.430 --> 00:52:49.290
+Istora: Yeah, yeah, and this kind of goes into a bigger topic about how the direction of development is
+
+489
+00:52:49.640 --> 00:52:57.499
+Istora: Decided within the community, and previously co-op was almost like… By default.
+
+490
+00:52:58.600 --> 00:53:01.890
+Istora: The funders and deciding direction of the protocol.
+
+491
+00:53:02.270 --> 00:53:11.329
+Istora: But now it's winding up, like, there must be some other way that we can come to these decisions in a decentralized way, ideally.
+
+492
+00:53:11.550 --> 00:53:14.110
+Istora: But again, that requires communication.
+
+493
+00:53:14.580 --> 00:53:16.680
+Istora: So, hopefully that will return.
+
+494
+00:53:17.310 --> 00:53:24.839
+Istora: But you did make a good point about the documentation, and maybe we can now talk about the improvements to the website.
+
+495
+00:53:25.190 --> 00:53:34.190
+Istora: That, the upcoming redesign and basically rebuilding of the whole thing later this year, can address.
+
+496
+00:53:35.040 --> 00:53:37.550
+Istora: Did you have any thoughts on that, Weigo?
+
+497
+00:53:37.670 --> 00:53:40.799
+Istora: Because I know that you were expressing interest in helping with that.
+
+498
+00:53:42.560 --> 00:54:00.649
+w1g0: Yeah, for me, the main interest is to make the smooth transition from the Gatsby framework to Astro. I don't know if that's already really being decided, if that needs to be decided at all.
+
+499
+00:54:00.830 --> 00:54:08.219
+w1g0: I think it's a great, solution. I'm in favor of that, and I'm really…
+
+500
+00:54:08.340 --> 00:54:19.859
+w1g0: offering my service to make that happen, if things need to be rewritten and observed that, transition goes smoothly. How the…
+
+501
+00:54:22.080 --> 00:54:34.769
+w1g0: well, how the website would look like. I think it would be interesting to have some more technical things that are more dynamic than static.
+
+502
+00:54:34.920 --> 00:54:45.270
+w1g0: Like, the pricing, like, how many nodes there are, who are, the miners, where are they located on, on a…
+
+503
+00:54:45.400 --> 00:54:51.190
+w1g0: On a map, so there's some backend stuff, I guess,
+
+504
+00:54:51.660 --> 00:55:04.209
+w1g0: that's… that's some things that I would like to see. So you can really track to see, is the protocol actually decentralized? Or I remember some phase that…
+
+505
+00:55:04.360 --> 00:55:08.829
+w1g0: When the difficult, the difficulty, when, some,
+
+506
+00:55:09.050 --> 00:55:24.310
+w1g0: miners are rogue or attacking the protocol, that it switches to, a higher, consensus, or that you need more percentage to overtake, the…
+
+507
+00:55:24.740 --> 00:55:30.449
+w1g0: Yeah, I've been out of the loop for some years.
+
+508
+00:55:30.560 --> 00:55:36.609
+w1g0: So, I have a conceptual understanding, but I don't know the terms.
+
+509
+00:55:36.880 --> 00:55:39.190
+Istora: I think you're talking about mess.
+
+510
+00:55:39.930 --> 00:55:41.140
+w1g0: Yeah, exactly.
+
+511
+00:55:41.320 --> 00:55:41.950
+Istora: Yep.
+
+512
+00:55:42.530 --> 00:55:49.330
+Istora: Again, that's…
+
+513
+00:55:49.330 --> 00:55:51.250
+Diego: mess was happening on the P2P layer, Or…
+
+514
+00:55:51.930 --> 00:55:56.730
+Diego: Yes, yeah, basically that's where it happened, yeah.
+
+515
+00:55:56.730 --> 00:55:59.050
+Istora: Right, so that was another non-hard fork.
+
+516
+00:55:59.180 --> 00:56:04.780
+Diego: Yes, yeah, it will give you eventual… yeah.
+
+517
+00:56:04.780 --> 00:56:13.779
+Istora: Yeah, definitely, like, it would be awesome to have some more visualization and dashboards, and ideally be able to,
+
+518
+00:56:15.450 --> 00:56:19.820
+Istora: like, show… Things like reorgs, if they happen.
+
+519
+00:56:19.930 --> 00:56:24.580
+Diego: Yes, well, something important to say is that
+
+520
+00:56:24.770 --> 00:56:30.320
+Diego: By now, Mess is deactivated. It's not active by default in the…
+
+521
+00:56:30.790 --> 00:56:38.339
+Diego: corgath version, the latest Corgate patient, and that has been the case for a really long time. That was a decision that
+
+522
+00:56:38.460 --> 00:56:45.859
+Diego: yeah, we published, and we had a public discussion, you can trace it back in GitHub, but overall, the…
+
+523
+00:56:46.020 --> 00:56:53.320
+Diego: The decision was that, yeah, the network is in a completely different state than it used to be when it was activated, and…
+
+524
+00:56:53.520 --> 00:56:59.110
+Diego: Having mess was, kind of a… technical depth.
+
+525
+00:56:59.310 --> 00:57:03.559
+Diego: Because, it diverse a lot from the upstream.
+
+526
+00:57:05.550 --> 00:57:11.929
+Diego: For the work I've been doing on alternative clients, I… I try to keep it.
+
+527
+00:57:12.060 --> 00:57:13.650
+Diego: like,
+
+528
+00:57:13.770 --> 00:57:21.660
+Diego: Disabled by default, but, like, they are being there just in case that we need to coordinate something to enable it.
+
+529
+00:57:21.990 --> 00:57:30.739
+Diego: But, I don't know, that's something I'm probably up to debate. I would vouch for… for removing it completely.
+
+530
+00:57:31.170 --> 00:57:36.610
+Diego: But, out of respect of the community, I let it there.
+
+531
+00:57:37.220 --> 00:57:41.709
+Diego: So… but yeah, that's also… Something else to talk about.
+
+532
+00:57:42.550 --> 00:57:46.239
+w1g0: if I remember correctly, there was something, that…
+
+533
+00:57:46.530 --> 00:57:50.400
+w1g0: There were some alarms that were going off if,
+
+534
+00:57:50.730 --> 00:58:00.259
+w1g0: a reorg happened, and that somebody, I think it was MioBits, that, had to intervene manually.
+
+535
+00:58:00.620 --> 00:58:01.590
+Diego: Yeah.
+
+536
+00:58:01.810 --> 00:58:06.490
+Diego: That was the case in the past, yeah, when the 51% attacks happened.
+
+537
+00:58:08.350 --> 00:58:10.550
+Istora: In what way was he intervening?
+
+538
+00:58:11.730 --> 00:58:18.560
+Diego: He had to coordinate with, yeah, the different stakeholders to basically enable
+
+539
+00:58:18.900 --> 00:58:23.349
+Diego: or deploy a new version. It wasn't there, but it was one of the two.
+
+540
+00:58:23.720 --> 00:58:24.500
+Istora: Right.
+
+541
+00:58:25.000 --> 00:58:32.820
+Istora: That's also, like, an infrastructure thing that… like, human infrastructure, that I think needs… reinforcing.
+
+542
+00:58:32.990 --> 00:58:39.599
+Diego: Yeah, absolutely, and… Yeah, I will not say it's centralized, but we need a
+
+543
+00:58:39.800 --> 00:58:45.380
+Diego: like, a common point of communication among different stakeholders for a situation like this one. Yeah.
+
+544
+00:58:46.800 --> 00:58:47.410
+Istora: Unless…
+
+545
+00:58:47.410 --> 00:58:59.279
+w1g0: That's what I… that's what I meant with, like, it needs to be visualized, that it's decentralized, and the solutions, so that it inspires people that the protocol is safe.
+
+546
+00:59:01.620 --> 00:59:03.980
+Diego: Yes,
+
+547
+00:59:05.240 --> 00:59:16.189
+Diego: Yes, I don't think this… all these communications have been taken, like, in the shadows, but yeah, I mean, all that was traceable on the network activity, but yeah, probably not…
+
+548
+00:59:16.750 --> 00:59:19.550
+Diego: properly… Announced, or…
+
+549
+00:59:19.550 --> 00:59:27.769
+Istora: Right. It's a bit of a paradox in… decentralized communities, like, where, like.
+
+550
+00:59:28.600 --> 00:59:34.039
+Istora: Someone kind of has to fill the role of being a single point, or at least a node.
+
+551
+00:59:35.240 --> 00:59:37.640
+Istora: relays information to people.
+
+552
+00:59:37.640 --> 00:59:52.839
+Diego: Yeah, and also in those, like, emergency situations, it's kind of important to have a… probably a single criteria to follow, because let's say that we have a dashboard that will alert everyone that we are going under a 51% attack.
+
+553
+00:59:53.560 --> 00:59:55.869
+Diego: And what would be the decision there?
+
+554
+00:59:56.440 --> 01:00:05.069
+Diego: So… I mean, at some point, maybe some… I mean… at least, general agreement on…
+
+555
+01:00:05.290 --> 01:00:18.950
+Diego: Who to follow, will be important, and it's really difficult to plan a protocol for every possible attack there, because basically those… their nature of attacks is that we cannot prevent them.
+
+556
+01:00:19.470 --> 01:00:24.929
+Diego: Yeah, we can only imagine what may come, but
+
+557
+01:00:25.610 --> 01:00:29.710
+Diego: So, yes, it's, yeah, it's a tough… Decision.
+
+558
+01:00:36.620 --> 01:00:40.009
+Istora: So yeah, having a nice landing page with
+
+559
+01:00:40.760 --> 01:00:47.790
+Istora: Visually appearing, dynamic stuff, appealing, would be… Great, I think. Yeah.
+
+560
+01:00:48.330 --> 01:00:49.559
+Diego: Definitely, yep.
+
+561
+01:00:52.120 --> 01:00:56.940
+Istora: The other thing I was… thinking about is, like, in the age of AI, like.
+
+562
+01:00:57.160 --> 01:01:03.639
+Istora: To what extent do we utilize AI on the website? I don't think we should be generating slot for everything.
+
+563
+01:01:03.890 --> 01:01:09.390
+Istora: But at the same time, it might be useful to use some features,
+
+564
+01:01:10.150 --> 01:01:13.569
+Istora: For example, like, checking that links are alive.
+
+565
+01:01:13.870 --> 01:01:16.780
+Istora: And potentially translating into different languages.
+
+566
+01:01:17.170 --> 01:01:22.660
+Istora: There's probably some uses of AI that… Basically, nobody is against.
+
+567
+01:01:24.180 --> 01:01:29.910
+Istora: And I think, there might even be the case of, like.
+
+568
+01:01:31.950 --> 01:01:37.239
+Istora: Turning some of the more complicated concepts into easier-to-understand articles using AI.
+
+569
+01:01:37.590 --> 01:01:42.070
+Istora: As a possible… as a possible use of it.
+
+570
+01:01:45.090 --> 01:01:47.029
+Istora: Do you have any opinions, Wigo?
+
+571
+01:01:48.100 --> 01:01:57.830
+w1g0: Yeah, on the opinion side, regarding which, agent, will be used, and if it's
+
+572
+01:01:57.960 --> 01:02:04.559
+w1g0: Freeware, or, where the funding comes from, or, well, that…
+
+573
+01:02:04.710 --> 01:02:17.430
+w1g0: That's, one thing. On the other, I don't… I'm not really, in favor of, AI, because it's,
+
+574
+01:02:17.510 --> 01:02:27.209
+w1g0: well, quite controversial at the moment, and as ETC is a more conservative,
+
+575
+01:02:27.800 --> 01:02:33.380
+w1g0: I think, I wouldn't be ashamed to integrate that as,
+
+576
+01:02:33.830 --> 01:02:36.329
+w1g0: As the last community out there.
+
+577
+01:02:38.250 --> 01:02:59.939
+weder: I disagree. I think that you can be all for ETC and the principled values that it holds, while still being supportive of the use of AI. I think that human oversight is definitely the most important part, whether it comes to your developing websites or making translations, it's just important that everything gets, like, a second check
+
+578
+01:02:59.940 --> 01:03:12.260
+weder: from a human, but when it comes to stuff like ETC, where the people who are contributing nowadays are volunteers, if we can triple or quadruple the productivity of the volunteers.
+
+579
+01:03:12.260 --> 01:03:26.260
+weder: Instead of having to necessarily get more volunteers, it can definitely lessen the load if it can be used productively and used to simply just do things that would take you longer to do without having to take as long to do it.
+
+580
+01:03:29.170 --> 01:03:30.469
+w1g0: Well, -
+
+581
+01:03:30.910 --> 01:03:44.240
+w1g0: if I may, pick up on that, on… based on what, Wade regarden is saying, I could, see, use for, let's say, in the Twitter together.
+
+582
+01:03:44.240 --> 01:03:51.260
+w1g0: application, an AI that is proposing, and that people are,
+
+583
+01:03:51.300 --> 01:03:54.770
+w1g0: Let's say, rewriting what it says, or…
+
+584
+01:03:54.960 --> 01:04:07.859
+w1g0: that approve, so that it can pass. In that, I'm… I think it can be useful, because I think that I'm not on X or Twitter or whatever.
+
+585
+01:04:07.960 --> 01:04:16.299
+w1g0: But I think it can be useful because the proposed tweets were very, very low in the past.
+
+586
+01:04:17.630 --> 01:04:25.550
+Istora: Right, indeed. And yeah, having even just, like, the idea generation on a… and the prompting to actually…
+
+587
+01:04:25.860 --> 01:04:28.249
+Istora: Create tweets on a regular basis.
+
+588
+01:04:28.420 --> 01:04:31.330
+Istora: would, I think, in itself, be useful?
+
+589
+01:04:34.740 --> 01:04:42.430
+Istora: And yeah, as long as a human signs off on it, and it's not completely garbage, I don't see the negative in terms of output.
+
+590
+01:04:43.150 --> 01:04:50.340
+Istora: On the front of, using AI during development, I'm totally for it, and I think that
+
+591
+01:04:50.880 --> 01:04:54.040
+Istora: Like, modern development basically requires
+
+592
+01:04:54.710 --> 01:05:04.500
+Istora: AI, like, almost everyone is going to be using it to some extent, some more than others, but I'm definitely in the leaning into agentic engineering camp.
+
+593
+01:05:04.760 --> 01:05:10.590
+Istora: And if I do work on the website, then that will most certainly be using coding agents,
+
+594
+01:05:11.070 --> 01:05:15.720
+Istora: To help with the migration, even if it's not, like… in the production
+
+595
+01:05:16.240 --> 01:05:25.099
+Istora: side of having, like, a chatbot to talk to ETC or something, but during the development rollout, I'm… I'm definitely pro-AI in that… in that sense.
+
+596
+01:05:25.740 --> 01:05:28.910
+Istora: As long as there's, like, a level of…
+
+597
+01:05:29.330 --> 01:05:37.900
+Istora: quality to the work that's outputted, and, you know, like any tool, it can be abused. So, as long as that's kept in check, then…
+
+598
+01:05:39.050 --> 01:05:46.560
+Istora: like Wiedergarden is saying, it's something that can really help amplify the efforts of the volunteers.
+
+599
+01:05:47.150 --> 01:05:53.880
+Istora: And, with a limited number of volunteers, I think it would be more and more essential for us to lean into these tools to have an effect.
+
+600
+01:05:55.050 --> 01:05:59.430
+w1g0: I think, I think I already said that I'm not…
+
+601
+01:05:59.800 --> 01:06:03.599
+w1g0: much in favor of AI, to…
+
+602
+01:06:03.800 --> 01:06:09.839
+w1g0: implemented really quickly, because I'm more inclined to,
+
+603
+01:06:10.160 --> 01:06:13.560
+w1g0: Search other volunteers and have a human.
+
+604
+01:06:13.710 --> 01:06:17.520
+w1g0: Interaction, with everything.
+
+605
+01:06:17.720 --> 01:06:35.790
+w1g0: And this is based, because I'm, yeah, I'm more an observer, I'm more an analyst, and from the contributions I see, they are very, very low quality, to begin with, and secondly, it's always a human that needs to check.
+
+606
+01:06:35.880 --> 01:06:43.409
+w1g0: And, that's… while that's great for beginners, I have the impression that, senior,
+
+607
+01:06:43.680 --> 01:06:52.449
+w1g0: The seniors, really get annoyed by, the low quality, and that they'd rather do it themselves from the first,
+
+608
+01:06:53.530 --> 01:06:54.980
+w1g0: From the first time.
+
+609
+01:06:54.980 --> 01:07:05.500
+weder: I think that's an interesting position, but I see it the other way around. The way I see it is that developers who've been doing development for before… since before there was AI,
+
+610
+01:07:05.500 --> 01:07:19.889
+weder: they understand how to work a codebase, they can do that by hand. They don't need AI. So when they… when AI steps into the picture, I feel like… and you may not have experienced this yourself, but at least for me.
+
+611
+01:07:20.070 --> 01:07:31.039
+weder: what happened was, is that it essentially took over certain parts of things that would… the time-consuming parts of things that I would typically not exactly enjoy the most doing.
+
+612
+01:07:31.040 --> 01:07:42.430
+weder: are effectively stripped out, and it's replaced by my, essentially, mostly my oversight, of what's going on. And I… and I'm not sure about the future, but
+
+613
+01:07:42.430 --> 01:07:47.129
+weder: The way things are moving right now, and it depends on you, you know, how you see things.
+
+614
+01:07:47.290 --> 01:07:49.500
+weder: AI is…
+
+615
+01:07:50.180 --> 01:08:10.039
+weder: becoming something that if you don't adapt to, then you may fall behind, and you may not, you may not be seen as adapt as people who are both good at development, and also good with artificial intelligence to help them. And the people who are just starting to learn how to code now.
+
+616
+01:08:10.040 --> 01:08:35.010
+weder: they are at a disadvantage because they are used to having artificial intelligence there, and they're not used to being able to debug things and to do things manually, and they are going to learn from the start to rely on AI to fix those things. So, from your point, I agree that it does cause quality issues, but I would say that comes from the more newer developed
+
+617
+01:08:35.010 --> 01:08:52.549
+weder: developers, and it's more important that we just try to expand, to give our knowledge from before AI and show them that you have to learn the ropes a little bit yourself before you incorporate AI, or else you're not going to understand what's going on in the back end and what's going on behind the scenes.
+
+618
+01:08:55.279 --> 01:09:10.329
+w1g0: Yeah, that makes perfect sense, but in the same way, Ethereum Classic is not the, the apex chain out there, so, maybe the timing is not,
+
+619
+01:09:10.849 --> 01:09:12.689
+w1g0: so crucial.
+
+620
+01:09:16.260 --> 01:09:26.329
+Istora: Yeah, I think Wiedergarden, you hit the nail on the head there, and I agree with your analysis. In terms of the timing for ETC,
+
+621
+01:09:26.680 --> 01:09:36.930
+Istora: I'd say, like, really, we just need to get things done, and if these tools are helping us achieve that with the limited resources we have, then that's a good thing.
+
+622
+01:09:37.319 --> 01:09:46.999
+Istora: I actually look forward, Wego, to showing you what is possible, with These agentic engineering tools.
+
+623
+01:09:47.130 --> 01:09:54.599
+Istora: in the right hands, and I'm thinking, like, the amount of hours I spent on the current version of the website just doing…
+
+624
+01:09:56.220 --> 01:10:10.729
+Istora: complete monkey work, basically, aligning divs, etc, is something that now takes seconds instead of hours and hours, and that time saved can be going to other things and more productive things, so…
+
+625
+01:10:10.980 --> 01:10:16.340
+Istora: Yeah, I… all I'd ask is keep an open mind, and…
+
+626
+01:10:16.700 --> 01:10:24.769
+Istora: Let's, work closely, and hopefully you'll be able to see some of the power of this technology, if we're working together on the website.
+
+627
+01:10:25.270 --> 01:10:28.630
+Istora: At least in terms of the… the less essential stuff.
+
+628
+01:10:29.040 --> 01:10:39.860
+Istora: And when it comes to the core clients, this is where it's really an important question of how much AI is too much AI, and what kind of quality controls are necessary.
+
+629
+01:10:40.020 --> 01:10:46.499
+Istora: Because it's not just a website, it's not just a contract even, but it's the whole protocol.
+
+630
+01:10:47.090 --> 01:10:55.859
+Diego: Yeah, I think, when… I mean, my opinion in this is about curation of the content. That's, the most important thing.
+
+631
+01:10:56.150 --> 01:10:59.340
+Diego: And it will also depend on how…
+
+632
+01:10:59.470 --> 01:11:04.030
+Diego: large is the codebase that we are building on, like, for example.
+
+633
+01:11:04.150 --> 01:11:11.580
+Diego: The codebase for the Nethermine plugin is less than 2,000 lines of code.
+
+634
+01:11:12.140 --> 01:11:19.050
+Diego: Which will be quite sim… quite easily reviewable for any human being,
+
+635
+01:11:19.170 --> 01:11:21.549
+Diego: And I think that's the way to go.
+
+636
+01:11:21.800 --> 01:11:28.300
+Diego: For larger code bases, it may be, like, a challenge itself.
+
+637
+01:11:28.500 --> 01:11:40.030
+Diego: like, for example, when I… something that I did when I've been working on, well, GETC, so this new type of revamped version of CoreGet on top of Core Ethereum.
+
+638
+01:11:40.560 --> 01:11:42.929
+Diego: Was to… to build.
+
+639
+01:11:43.290 --> 01:11:44.830
+Diego: diff basis.
+
+640
+01:11:44.980 --> 01:11:55.420
+Diego: So, because the main idea with that work was to try to bring it back, all the changes that were removed by the GoEthereum team.
+
+641
+01:11:56.240 --> 01:12:02.569
+Diego: All the things that were important for a proof-of-work network, and adapting what was necessary
+
+642
+01:12:02.720 --> 01:12:13.269
+Diego: for… for, like, adapting into their new architecture, because, of course, they have been changing things. But what… what I tried was to… well, to… to…
+
+643
+01:12:13.730 --> 01:12:19.100
+Diego: Turn back to life to those, those, commits.
+
+644
+01:12:19.330 --> 01:12:25.820
+Diego: So, kind of reverting them, but in an intelligent way. And during that process, what it did was
+
+645
+01:12:26.150 --> 01:12:32.539
+Diego: To put in place several tools that will create a wiki page with the actual diff.
+
+646
+01:12:32.850 --> 01:12:36.280
+Diego: That will allow anyone to check
+
+647
+01:12:36.540 --> 01:12:39.340
+Diego: If anything had been changed from
+
+648
+01:12:39.640 --> 01:12:43.329
+Diego: The previous state of the codebase.
+
+649
+01:12:43.490 --> 01:12:45.820
+Diego: So, that… will not…
+
+650
+01:12:45.970 --> 01:12:56.850
+Diego: Ensure that, it will be bug-free, but at least it should give us a good signal that it will be in the very same state.
+
+651
+01:12:57.080 --> 01:12:58.949
+Diego: As before the removals.
+
+652
+01:12:59.150 --> 01:13:07.559
+Diego: So, that's where I think it's important, the curation and all the tools that we can build around for humans to validate
+
+653
+01:13:07.700 --> 01:13:09.269
+Diego: what the AI made.
+
+654
+01:13:09.580 --> 01:13:14.609
+Diego: And… and more… moreover, in… in a consensus.
+
+655
+01:13:14.800 --> 01:13:16.410
+Diego: Client.
+
+656
+01:13:16.620 --> 01:13:26.789
+Diego: So, yes, I think that's… that's important, and I agree on both sides. I think it's an amazing tool that allows us to do amazing things.
+
+657
+01:13:26.930 --> 01:13:33.290
+Diego: But the human touch and the eye and the criteria has to still be there.
+
+658
+01:13:33.550 --> 01:13:38.350
+Diego: And we never had to lose that, at least, for now. Yeah.
+
+659
+01:13:38.350 --> 01:13:41.169
+Istora: Right. And whilst the AI can…
+
+660
+01:13:41.770 --> 01:13:43.959
+Istora: Create valid code.
+
+661
+01:13:44.280 --> 01:13:54.570
+Istora: it doesn't necessarily have the depth and the historical context to understand what's best for ETC, specifically. I mean, for example, this…
+
+662
+01:13:55.170 --> 01:14:01.320
+Istora: this previous topic of F… F… 69. 69?
+
+663
+01:14:01.660 --> 01:14:14.450
+Istora: It could be the case that maybe an agent decided, okay, this is… let's upgrade, you know? You need to bump the version. And then you just go down that path and spend however many hours implementing that without really under, like, should we do this?
+
+664
+01:14:14.720 --> 01:14:21.320
+Istora: And that's… that's not something that I think that AI is at yet, to make those high-context decisions.
+
+665
+01:14:21.440 --> 01:14:27.710
+Diego: Yes, part of my research was also, like, trying to… to go deep into the… the…
+
+666
+01:14:27.950 --> 01:14:32.570
+Diego: Earlier on the old decisions that lead to the inclusion of
+
+667
+01:14:32.870 --> 01:14:42.589
+Diego: of this, and then was when I realized, okay, yeah, that was there for a reason, and they already had this discussion internally into the Ethereum
+
+668
+01:14:43.180 --> 01:14:49.749
+Diego: groups. So, yeah, that was already settled. But it's, yeah, that's something that, yeah, the AI missed.
+
+669
+01:14:50.050 --> 01:14:50.760
+Diego: Probably.
+
+670
+01:14:51.340 --> 01:14:53.049
+Istora: Could be the case. Yup.
+
+671
+01:14:53.900 --> 01:14:56.630
+Istora: And, and yeah, the… heh.
+
+672
+01:14:57.030 --> 01:15:07.669
+Istora: It could be the case that in the far future, like, the whole protocol is controlled by agents, but I really don't think we're there yet, and we have to recognize the limitations of the tools that exist as they do today.
+
+673
+01:15:08.130 --> 01:15:12.700
+Istora: And I see them as just… Like, extremely good code completion.
+
+674
+01:15:13.200 --> 01:15:16.690
+Istora: But not necessarily, decision-making.
+
+675
+01:15:17.140 --> 01:15:18.050
+Istora: Tools.
+
+676
+01:15:18.250 --> 01:15:26.530
+Istora: And depending on the complexity and importance of the software that's been worked on, I think…
+
+677
+01:15:26.670 --> 01:15:32.290
+Istora: humans definitely still have a large part to play. Yeah. And we'll do for the foreseeable future.
+
+678
+01:15:34.570 --> 01:15:41.120
+Diego: Yeah, something like, for example, that an AI is… well, in my experience, has not been incredible, was that…
+
+679
+01:15:41.260 --> 01:15:53.519
+Diego: Like, when you're working, for example, in a large codebase written by humans like BESU, and you want to introduce a refactor that has to be readable for reviewers, that you have to convince to include it.
+
+680
+01:15:53.650 --> 01:15:59.239
+Diego: It's not really good, because it doesn't think in the same way that a human does.
+
+681
+01:15:59.420 --> 01:16:15.799
+Diego: So, you have to kind of manually go through all the transformation, probably to reach out the proposition that it made, but you have to do it in a way that will convince, and during the process, you will get convinced also that it's,
+
+682
+01:16:15.890 --> 01:16:20.919
+Diego: It could change, like, taking all the guardrails that you will…
+
+683
+01:16:21.060 --> 01:16:31.300
+Diego: take for any call that you had written manually, so I think, like, for example, that's… it's another example where the human touch is really important, because in the end.
+
+684
+01:16:31.650 --> 01:16:36.739
+Diego: There are still humans merging code, and you have to think of them.
+
+685
+01:16:37.150 --> 01:16:45.730
+Diego: And the best usage of their time as reviewers and maintainers of the codebase. So it's not just about, throwing up, like.
+
+686
+01:16:46.070 --> 01:16:54.380
+Diego: a pull request with a thousand lines changing, because, I mean, that will be actually disrespectful for the time of the reviewers.
+
+687
+01:16:54.710 --> 01:17:03.910
+Diego: So yeah, that's also something else that we have to keep an eye on. Right, right. And actually, it was a time that I was talking with a Nethermine team.
+
+688
+01:17:04.200 --> 01:17:08.800
+Diego: About some pull requests that I had to send for… for the…
+
+689
+01:17:09.110 --> 01:17:15.229
+Diego: ETC plugin to work well with their codebase, and they told me that I had to, like.
+
+690
+01:17:15.410 --> 01:17:25.150
+Diego: signal to them to send them a message with a pull request, because they were receiving that many pull requests coming from AI that was impossible for them to handle, and…
+
+691
+01:17:25.370 --> 01:17:31.690
+Diego: As they are, like, really good professionals, they had to… to go through all the… all the proposals.
+
+692
+01:17:31.810 --> 01:17:47.120
+Diego: But, yeah, most of them were garbage or on this shape. I mean, someone ran an agent against their codebase, and who knows which prompt they use, and okay, they decide to just send a pull request.
+
+693
+01:17:47.470 --> 01:17:52.670
+Diego: So, yeah, so the human part there is important. Right.
+
+694
+01:17:52.670 --> 01:17:57.490
+Istora: And unless you have experience working with the codebase and the protocol.
+
+695
+01:17:57.630 --> 01:18:08.430
+Diego: Yeah, and also having experience reviewing other people's code and all of that. So, yeah, I think that's still the human part. It's there, and it's quite important.
+
+696
+01:18:08.430 --> 01:18:14.130
+Istora: Right. So even if it's easy to generate a ton of new features and have
+
+697
+01:18:14.950 --> 01:18:17.539
+Istora: I don't know, like, 10 pull requests a day.
+
+698
+01:18:17.650 --> 01:18:19.480
+Istora: Through agentic work.
+
+699
+01:18:20.460 --> 01:18:27.250
+Istora: that doesn't actually improve the speed at which you can merge them. Yeah. You still need the human in the loop there.
+
+700
+01:18:27.540 --> 01:18:34.520
+Istora: And this slow, methodical, Human-based approach, especially for the critical
+
+701
+01:18:34.830 --> 01:18:40.069
+Istora: lines of code in the clients, I think is going to be important to keep around for a long time.
+
+702
+01:18:44.140 --> 01:18:49.169
+Istora: Okay, so we are, like… it's been a good discussion, it's been…
+
+703
+01:18:49.330 --> 01:18:56.470
+Istora: more than an hour now, so I think maybe now's a good time to wrap things up. Would…
+
+704
+01:18:56.920 --> 01:19:04.300
+Istora: Is there any other comments or last things to mention before we do so from… from… to join us?
+
+705
+01:19:06.780 --> 01:19:19.370
+w1g0: I have, nothing else to add. I just, wanted to, ask you what the counter… the ECIP for the counter-proposal for Olympia, was.
+
+706
+01:19:20.100 --> 01:19:22.969
+Istora: That number was 1120.
+
+707
+01:19:24.930 --> 01:19:26.529
+Diego: Awesome. Chocolate.
+
+708
+01:19:28.150 --> 01:19:33.140
+Istora: ECIP 1120. I'll add that to the show notes, which you'll find in the transcript.
+
+709
+01:19:33.140 --> 01:19:33.830
+w1g0: Thank you.
+
+710
+01:19:34.940 --> 01:19:35.740
+Istora: No problem.
+
+711
+01:19:38.080 --> 01:19:40.110
+weder: Nothing for me, thank you so much.
+
+712
+01:19:41.840 --> 01:19:46.520
+Istora: Okay, thank you both for joining, and…
+
+713
+01:19:47.150 --> 01:20:04.700
+Istora: The next community call will be 2 weeks in the future, probably at the regular time, sorry, Europe, of 0 to 100 hours UTC on Friday, 2 weeks' time. So, thank you for everyone participating today. It's been a…
+
+714
+01:20:05.080 --> 01:20:07.780
+Istora: A deeply stimulating call.
+
+715
+01:20:07.910 --> 01:20:14.710
+Istora: So, yeah, see you next time. Thanks for joining. Till then, stay classy.
+
+716
+01:20:14.710 --> 01:20:15.810
+Diego: Thank you.
+
+717
+01:20:16.030 --> 01:20:17.939
+w1g0: Thanks for the discussion. Bye.
