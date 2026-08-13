@@ -223,7 +223,20 @@ try {
 console.log("▸ launching browser…");
 // --disable-dev-shm-usage: this devcontainer caps /dev/shm at 64 MB, which
 // crashes Chromium on long 1080p screencast runs; back it with a tmp file.
-const browser = await chromium.launch({ args: ["--disable-dev-shm-usage"] });
+// PLAYWRIGHT_CHROMIUM_EXECUTABLE lets us point at a self-contained browser
+// (e.g. a Nix-built chromium) instead of Playwright's downloaded binary, which
+// needs FHS system libs this Nix devcontainer doesn't provide.
+const browser = await chromium.launch({
+  // --no-sandbox: required for a Nix-built chromium running as root in this
+  // container. The bigger V8 heap keeps the full-call audio decode + spectrum
+  // from OOM-closing the page.
+  args: [
+    "--disable-dev-shm-usage",
+    "--no-sandbox",
+    "--js-flags=--max-old-space-size=4096",
+  ],
+  executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined,
+});
 const context = await browser.newContext({
   viewport: { width: 1920, height: 1080 },
   deviceScaleFactor: 1,
