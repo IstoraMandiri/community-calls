@@ -171,3 +171,23 @@ h6,
 .prose blockquote p:last-of-type::after {
   content: none;
 }
+
+/* Embedded media in call markdown: images centred, images and video embeds
+   framed with rounded corners, a thin grey border, and a soft shadow. */
+.prose img,
+.prose iframe {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.prose img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose iframe {
+  display: block;
+  width: 100%;
+}

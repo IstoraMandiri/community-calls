@@ -80,6 +80,30 @@ const stripDevRoutes = {
 // Dev-only: serve the audiogen reference recording from assets/ (kept in the
 // repo for devs + future videogen use). `apply: "serve"` means this plugin only
 // runs in `astro dev`, never in the build, and the file lives outside public/
+// Astro's dev-only /_image endpoint loads a local source by fetching
+// `/@fs/...` back from itself, using the origin the *browser* used. Behind a
+// proxy or a forwarded port (Coder, VS Code) that origin is not reachable from
+// inside the container, so every optimised image 500s in dev while the static
+// build is fine. Rewrite the Host header for /_image requests only, so the
+// self-fetch goes to the address the dev server is actually listening on.
+/** @type {import('vite').Plugin} */
+const imageEndpointLocalHost = {
+  name: "image-endpoint-local-host",
+  apply: "serve",
+  configureServer(server) {
+    server.middlewares.use((req, _res, next) => {
+      if (!(req.url ?? "").startsWith("/_image")) return next();
+      const addr = server.httpServer?.address();
+      const port =
+        typeof addr === "object" && addr
+          ? addr.port
+          : server.config.server.port;
+      if (port) req.headers.host = `localhost:${port}`;
+      next();
+    });
+  },
+};
+
 // so it is never copied into dist/ at all - it cannot reach production.
 /** @type {import('vite').Plugin} */
 const audiogenDevRecording = {
@@ -125,7 +149,7 @@ export default defineConfig({
   prefetch: true,
   devToolbar: { enabled: false },
   vite: {
-    plugins: [tailwindcss(), audiogenDevRecording],
+    plugins: [tailwindcss(), audiogenDevRecording, imageEndpointLocalHost],
     // Don't reload the dev server on non-source churn — notably during a
     // videogen render, where a stray change under .claude/, .cache/ (the
     // render's own MP4 output), or public/ media would otherwise HMR-reload
